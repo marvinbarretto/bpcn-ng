@@ -1,35 +1,20 @@
-# -----------------------
 # Base image
-# -----------------------
-  FROM node:20-alpine AS builder
+FROM node:20
 
-  WORKDIR /app
+# Create app directory
+WORKDIR /app
 
-  # Install deps
-  COPY package.json package-lock.json ./
-  RUN npm ci
+# Copy everything
+COPY . .
 
-  # Copy rest of app
-  COPY . .
+# Install dependencies
+RUN npm ci
 
-  # Build Angular SSR
-  RUN npm run build:ssr
+# Build Angular SSR app
+RUN npm run build:ssr
 
-  # -----------------------
-  # Runtime image
-  # -----------------------
-  FROM node:20-alpine AS runner
+# Expose port
+EXPOSE 4000
 
-  WORKDIR /app
-
-  # Copy only dist + deps
-  COPY --from=builder /app/dist ./dist
-  COPY --from=builder /app/node_modules ./node_modules
-  COPY --from=builder /app/package.json ./package.json
-  COPY --from=builder /app/.env ./
-
-  # Expose port
-  EXPOSE 4000
-
-  # Start server
-  CMD ["node", "dist/bpcn-ng/server/server.mjs"]
+# Start the SSR server
+CMD ["npm", "run", "serve:ssr"]
