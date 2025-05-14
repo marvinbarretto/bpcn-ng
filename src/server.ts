@@ -1,67 +1,135 @@
+// File: server.ts
+import 'zone.js/node';
+
 import { APP_BASE_HREF } from '@angular/common';
-import { CommonEngine, isMainModule } from '@angular/ssr/node';
-import express from 'express';
-import { dirname, join, resolve } from 'node:path';
+import { CommonEngine } from '@angular/ssr/node';
+import express, { Request, Response } from 'express';
+import compression from 'compression';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import { join } from 'node:path';
+import { existsSync } from 'node:fs';
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
+import { dirname } from 'path';
 import bootstrap from './main.server';
+import { USER_THEME_TOKEN } from './libs/tokens/user-theme.token';
+import cookieParser from 'cookie-parser';
+import { getRedisClient } from '../server/redis/redis.client';
+import newsRoute from '../server/routes/news.route'; // Add when reintroducing custom routes
 
-const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-const browserDistFolder = resolve(serverDistFolder, '../browser');
-const indexHtml = join(serverDistFolder, 'index.server.html');
+// === Load env ===
+dotenv.config();
 
+// === Debug Utilities ===
+const isDev = process.env['NODE_ENV'] !== 'production';
+function log(...args: unknown[]) {
+  if (isDev) console.log('[SSR]', ...args);
+}
+function logError(...args: unknown[]) {
+  console.error('[SSR:ERROR]', ...args);
+}
+
+// === Express App ===
 const app = express();
-const commonEngine = new CommonEngine();
+app.set('trust proxy', 1);
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+// === Path Setup ===
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const distFolder = join(process.cwd(), 'dist/bpcn-ng/browser');
 
-/**
- * Serve static files from /browser
- */
-app.get(
-  '**',
-  express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: 'index.html'
-  }),
+const indexHtml = join(distFolder, 'index.html');
+
+
+if (!existsSync(indexHtml)) logError('index.html not found at:', indexHtml);
+if (!existsSync(distFolder)) logError('DIST folder not found at:', distFolder);
+if (!bootstrap) logError('Bootstrap module not found');
+
+// === SSR Engine ===
+const engine = new CommonEngine();
+
+// === Middleware ===
+app.use(compression());
+app.use(cors());
+app.use(cookieParser());
+
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests, try again later.',
+  })
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
-app.get('**', (req, res, next) => {
-  const { protocol, originalUrl, baseUrl, headers } = req;
+// === Test Redis Route ===
+app.get('/api/test-redis', async (req: Request, res: Response) => {
+  try {
+    const redis = await getRedisClient();
+    await redis.set('hello', 'world');
+    const value = await redis.get('hello');
+    res.json({ message: 'Redis is working', value });
+  } catch (err) {
+    logError('Redis test route failed:', err);
+    res.status(500).json({ error: 'Redis failure' });
+  }
+});
 
-  commonEngine
+// === Custom Routes ===
+app.use(newsRoute); // Optional: bring in when ready
+
+// === Static Assets ===
+app.get(
+  '*.*',
+  express.static(distFolder, {
+    maxAge: '1y',
+  })
+);
+
+// === SSR Rendering Route ===
+app.get('*', (req: Request, res: Response) => {
+  const theme = req.cookies['userTheme'] ?? 'Default';
+  const { protocol, headers, originalUrl, baseUrl } = req;
+  const fullUrl = `${protocol}://${headers.host}${originalUrl}`;
+  log(`[${req.method}] ${originalUrl}`);
+
+  const environment = {
+    strapiUrl: process.env['STRAPI_URL'] || 'http://localhost:1337',
+    strapiToken: process.env['STRAPI_TOKEN'] || '',
+  };
+
+  engine
     .render({
       bootstrap,
       documentFilePath: indexHtml,
-      url: `${protocol}://${headers.host}${originalUrl}`,
-      publicPath: browserDistFolder,
-      providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+      url: fullUrl,
+      publicPath: distFolder,
+      providers: [
+        { provide: APP_BASE_HREF, useValue: baseUrl },
+        { provide: 'INITIAL_ENV', useValue: environment },
+        {
+          provide: 'INITIAL_AUTH_STATE',
+          useValue: { user: null, token: null },
+        },
+        { provide: USER_THEME_TOKEN, useValue: theme },
+      ],
     })
     .then((html) => res.send(html))
-    .catch((err) => next(err));
+    .catch((err) => {
+      logError('SSR render failed:', err);
+      res.status(500).send('SSR render error');
+    });
 });
 
-/**
- * Start the server if this module is the main entry point.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
-if (isMainModule(import.meta.url)) {
+// === Run Server ===
+async function run(): Promise<void> {
   const port = process.env['PORT'] || 4000;
+
   app.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    log(`✅ Angular SSR listening at http://localhost:${port}`);
   });
+
+  // Prevent exit by awaiting a never-resolving promise
+  await new Promise(() => {});
 }
 
-export default app;
+run();
