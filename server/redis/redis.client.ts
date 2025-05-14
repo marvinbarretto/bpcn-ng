@@ -4,11 +4,16 @@ let client: ReturnType<typeof createClient>;
 
 export async function getRedisClient() {
   if (!client) {
-    client = createClient({
-      url: `redis://${process.env['REDIS_HOST'] || '127.0.0.1'}:${
-        process.env['REDIS_PORT'] || 6379
-      }`,
-    });
+    const redisUrl = process.env['REDIS_URL'] ||
+  `redis://${process.env['REDIS_HOST'] || '127.0.0.1'}:${process.env['REDIS_PORT'] || 6379}`;
+
+client = createClient({ url: redisUrl });
+
+    // client = createClient({
+    //   url: `redis://${process.env['REDIS_HOST'] || '127.0.0.1'}:${
+    //     process.env['REDIS_PORT'] || 6379
+    //   }`,
+    // });
 
     client.on('ready', () => console.log('🟢 Redis is ready'));
     client.on('error', (err) => console.error('🔴 Redis error:', err));
