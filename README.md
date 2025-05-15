@@ -221,3 +221,19 @@ or
 ```bash
 npm run release -- --release-as major
 ```
+
+
+- Do your work locally.
+- Commit with a proper prefix:
+
+feat:, fix:, chore:, docs:, etc.
+
+Add BREAKING CHANGE: if needed.
+
+- Run `npm run release` when you’re ready.
+
+- Push with:
+
+```bash
+git push && git push --tags
+```

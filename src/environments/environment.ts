@@ -1,0 +1,20 @@
+export const environment = {
+  production: false,
+  enableAllFeaturesInDevelopment: true,
+  strapiUrl: 'http://localhost:1337',
+  strapiToken: '',
+  featureFlags: {
+    homepageHero: false,
+    homepageNewsWidget: false,
+    homepageEventsWidget: false,
+    theme: false,
+    search: false,
+    login: true,
+    register: true,
+    news: false,
+    events: true,
+    research: false,
+    siteMap: false,
+    accessibility: false,
+  },
+};
