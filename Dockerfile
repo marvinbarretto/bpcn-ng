@@ -11,10 +11,10 @@ COPY . .
 RUN npm ci
 
 # Build Angular SSR app
-RUN npm run build:ssr
+RUN npm run serve:ssr:bpcn-ng
 
 # Expose port
 EXPOSE 4000
 
 # Start the SSR server
-CMD ["npm", "run", "serve:ssr"]
+CMD ["npm", "run", "serve:ssr:bpcn-ng"]
