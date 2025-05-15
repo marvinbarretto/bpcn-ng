@@ -11,7 +11,7 @@ import { ViewportService } from '../data-access/viewport.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngIf="isDev" class="debug-panel">
+    <div class="debug-panel">
       <pre>User: {{ user$$() | json }}</pre>
       <pre>Token: {{ token$$() }}</pre>
       <pre>Mobile view: {{ isMobile$$() }}</pre>

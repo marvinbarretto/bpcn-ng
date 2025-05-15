@@ -9,7 +9,7 @@ export const environment = {
     homepageHero: false,
     homepageNewsWidget: false,
     homepageEventsWidget: false,
-    theme: false,
+    theme: true,
     search: false,
     login: true,
     register: true,
