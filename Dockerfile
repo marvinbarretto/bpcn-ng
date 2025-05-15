@@ -11,7 +11,7 @@ COPY . .
 RUN npm ci
 
 # Build Angular SSR app
-RUN npm run serve:ssr:bpcn-ng
+RUN npm run build
 
 # Expose port
 EXPOSE 4000
