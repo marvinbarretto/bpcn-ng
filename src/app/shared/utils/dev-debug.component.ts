@@ -1,6 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthStore } from '../../auth/data-access/auth.store';
 import { environment } from '../../../environments/environment';
+import { PanelStore } from '../ui/panel/panel.store';
+import { HeaderComponent } from '../feature/header/header.component';
 import { ViewportService } from '../data-access/viewport.service';
 
 @Component({
@@ -9,10 +12,10 @@ import { ViewportService } from '../data-access/viewport.service';
   imports: [CommonModule],
   template: `
     <div *ngIf="isDev" class="debug-panel">
-      <!-- <pre>User: {{ user$$() | json }}</pre> -->
-      <!-- <pre>Token: {{ token$$() }}</pre> -->
+      <pre>User: {{ user$$() | json }}</pre>
+      <pre>Token: {{ token$$() }}</pre>
       <pre>Mobile view: {{ isMobile$$() }}</pre>
-      <!-- <pre>Active panel: {{ activePanel$$() }}</pre> -->
+      <pre>Active panel: {{ activePanel$$() }}</pre>
     </div>
   `,
   styles: [
@@ -32,14 +35,14 @@ import { ViewportService } from '../data-access/viewport.service';
   ],
 })
 export class DevDebugComponent {
-  // private readonly authStore = inject(AuthStore);
-  // private readonly panelStore = inject(PanelStore);
+  private readonly authStore = inject(AuthStore);
+  private readonly panelStore = inject(PanelStore);
   private readonly viewport = inject(ViewportService);
 
-  // user$$ = this.authStore.user$$;
-  // token$$ = this.authStore.token$$;
+  user$$ = this.authStore.user$$;
+  token$$ = this.authStore.token$$;
   isMobile$$ = this.viewport.isMobile$$;
-  // activePanel$$ = this.panelStore.activePanel;
+  activePanel$$ = this.panelStore.activePanel;
 
   isDev = !environment.production;
 }
