@@ -43,6 +43,11 @@
           "configurations": {
             "production": {
               "outputHashing": "all",
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "vendor": true
+              },
               "budgets": [
                 {
                   "type": "initial",

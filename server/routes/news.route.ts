@@ -2,52 +2,45 @@ import { Router } from 'express';
 import axios from 'axios';
 import { getRedisClient } from '../redis/redis.client';
 import { checkCache } from '../middleware/check-cache.middleware';
-import path from 'path';
-
+import { XMLParser } from 'fast-xml-parser';
 
 const router = Router();
-
 const NEWS_CACHE_TTL = Number(process.env['NEWS_CACHE_TTL_DAYS'] || 28) * 86400;
 const rssUrl = `https://news.google.com/rss/search?q=prostate+cancer&hl=en-GB&gl=GB&ceid=GB:en`;
 
 router.get('/api/news', checkCache, async (req, res) => {
-  try {
-    console.log('🔄 Fetching fresh RSS feed');
-    const response = await axios.get(rssUrl);
+  const redis = await getRedisClient();
+  const cachedData = await redis.get('newsData');
 
-    const redis = await getRedisClient();
+  if (cachedData) {
+    console.log('✅ Served from Redis cache');
+    return res.json(JSON.parse(cachedData));
+  }
+
+  try {
+    const xmlResponse = await axios.get(rssUrl);
+    const parser = new XMLParser({ ignoreAttributes: false });
+    const json = parser.parse(xmlResponse.data);
+    const items = json.rss?.channel?.item ?? [];
+
+    const parsed = items.map((item: any) => ({
+      title: item.title ?? '',
+      link: item.link ?? '',
+      pubDate: item.pubDate ?? '',
+      description: item.description ?? '',
+    }));
+
     await redis.setEx(
       'newsData',
       NEWS_CACHE_TTL,
-      JSON.stringify(response.data)
+      JSON.stringify(parsed)
     );
-    console.log('✅ Cached new data in Redis');
-
-    res.send(response.data);
+    console.log('✅ Cached new data in Redis', typeof parsed, parsed?.length);
+    return res.json(parsed);
   } catch (error) {
-    console.error('❌ Error fetching news:');
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error:', {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
-    } else {
-      console.error(error);
-    }
-
-    res.status(500).send('Error fetching news');
+    console.error('❌ Error fetching news:', error);
+    return res.status(500).send('Error fetching news');
   }
 });
-
-// Debugging
-// const fs = require('fs');
-// const filePath = path.resolve(process.cwd(), 'news.xml');
-// console.log('[🧪 Loading mock RSS from]', filePath);
-
-// router.get('/api/news', async (req, res) => {
-//   const data = fs.readFileSync(filePath, 'utf8');
-//   res.send(data);
-// });
 
 export default router;

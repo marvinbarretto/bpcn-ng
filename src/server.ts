@@ -13,7 +13,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'path';
 import bootstrap from './main.server';
-import { USER_THEME_TOKEN } from './libs/tokens/user-theme.token';
+import { generateInlineThemeCss, USER_THEME_TOKEN } from './libs/tokens/user-theme.token';
 import cookieParser from 'cookie-parser';
 import { getRedisClient } from '../server/redis/redis.client';
 import newsRoute from '../server/routes/news.route';
@@ -47,6 +47,17 @@ export async function createServer(): Promise<express.Express> {
   const engine = new CommonEngine();
 
   // Middleware
+
+  // 🧠 Log total server timing first - lets investigate how long SSR takes on these cold servers
+  app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+      const duration = Date.now() - start;
+      console.log(`[⏱️ SSR] ${req.method} ${req.originalUrl} - ${res.statusCode} - ${duration}ms`);
+    });
+    next();
+  });
+
   app.use(compression());
   app.use(cors());
   app.use(cookieParser());
@@ -102,7 +113,15 @@ export async function createServer(): Promise<express.Express> {
           { provide: USER_THEME_TOKEN, useValue: theme },
         ],
       })
-      .then((html) => res.send(html))
+      .then((html) => {
+        const inlineThemeCss = generateInlineThemeCss(theme);
+        const themeScript = `<script>window.__SSR_THEME__ = '${theme}';</script>`;
+        const injectedHtml = html.replace(
+          '</head>',
+          `${inlineThemeCss}\n${themeScript}\n</head>`
+        );
+        res.send(injectedHtml);
+      })
       .catch((err) => {
         logError('SSR render failed:', err);
         res.status(500).send('SSR render error');
