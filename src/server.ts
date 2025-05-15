@@ -35,12 +35,12 @@ export async function createServer(): Promise<express.Express> {
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const distFolder = join(process.cwd(), 'dist/bpcn-ng/browser');
-  const indexHtml = join(distFolder, 'index.html');
+  const indexHtml = join(distFolder, 'index.csr.html');
 
   log(`📁 DIST folder: ${distFolder}`);
-  log(`📄 index.html: ${indexHtml}`);
+  log(`📄 index.csr.html: ${indexHtml}`);
 
-  if (!existsSync(indexHtml)) logError('index.html not found at:', indexHtml);
+  if (!existsSync(indexHtml)) logError('index.csr.html not found at:', indexHtml);
   if (!existsSync(distFolder)) logError('DIST folder not found at:', distFolder);
   if (!bootstrap) logError('Bootstrap module not found');
 
