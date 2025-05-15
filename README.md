@@ -223,14 +223,23 @@ npm run release -- --release-as major
 ```
 
 
-- Do your work locally.
-- Commit with a proper prefix:
 
-feat:, fix:, chore:, docs:, etc.
+# Git Aliases
+alias release="npm run release"
+alias gs="git status"
+alias gcm="git commit -m"
+alias gp="git pull"
+alias gpt="git push && git push --tags"
 
-Add BREAKING CHANGE: if needed.
-
-- Run `npm run release` when you’re ready.
+## Workflow
+- Do your work locally on a feature branch
+  - `gs` (Check status)
+  - `gp` (Pull)
+  
+- Commit with a proper prefix: (feat:, fix:, chore:, docs:, etc.)
+  - `gcm` (Add commit message)
+  - `release` (Add `--release-as` flag to override the version bump if necessary)
+  - `gpt` (Push with tags)
 
 - Push with:
 
