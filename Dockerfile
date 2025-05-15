@@ -17,4 +17,4 @@ RUN npm run build
 EXPOSE 4000
 
 # Start the SSR server
-CMD ["npm", "run", "serve:ssr:bpcn-ng"]
+CMD ["npm", "run", "serve:ssr"]

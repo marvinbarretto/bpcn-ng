@@ -2,6 +2,8 @@ import { Router } from 'express';
 import axios from 'axios';
 import { getRedisClient } from '../redis/redis.client';
 import { checkCache } from '../middleware/check-cache.middleware';
+import path from 'path';
+
 
 const router = Router();
 
@@ -23,9 +25,29 @@ router.get('/api/news', checkCache, async (req, res) => {
 
     res.send(response.data);
   } catch (error) {
-    console.error('❌ Error fetching news:', error);
+    console.error('❌ Error fetching news:');
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
+    } else {
+      console.error(error);
+    }
+
     res.status(500).send('Error fetching news');
   }
 });
+
+// Debugging
+// const fs = require('fs');
+// const filePath = path.resolve(process.cwd(), 'news.xml');
+// console.log('[🧪 Loading mock RSS from]', filePath);
+
+// router.get('/api/news', async (req, res) => {
+//   const data = fs.readFileSync(filePath, 'utf8');
+//   res.send(data);
+// });
 
 export default router;
