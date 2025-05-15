@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.2...v0.0.3) (2025-05-15)
+
+
+### Features
+
+* Add google fonts ([f8f4110](https://github.com/marvinbarretto/bpcn-ng/commit/f8f41101652e8f812ad2473f4fbed26a5a4cc1b1))
+* add shared utils ([c44cab7](https://github.com/marvinbarretto/bpcn-ng/commit/c44cab71b9bf33862b1dabf52a3fe241d793b54a))
+
 ### [0.0.2](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.1...v0.0.2) (2025-05-15)
 
 
