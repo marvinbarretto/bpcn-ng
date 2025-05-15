@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.3...v0.0.4) (2025-05-15)
+
+
+### Features
+
+* Serve news as json, speed up page ([3af3fcd](https://github.com/marvinbarretto/bpcn-ng/commit/3af3fcde97d3ff79bc07598be81e03cbb1c05148))
+
 ### [0.0.3](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.2...v0.0.3) (2025-05-15)
 
 
