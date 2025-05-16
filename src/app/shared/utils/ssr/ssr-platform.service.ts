@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SsrPlatformService {
+  constructor() {
+    console.log('%c[SsrPlatformService] CONSTRUCTOR FIRED', 'color: hotpink');
+  }
+
   private readonly platformId = inject(PLATFORM_ID);
 
   get isBrowser(): boolean {

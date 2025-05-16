@@ -10,9 +10,11 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { authInterceptor } from './auth/data-access/auth.interceptor';
 import { GlobalErrorHandler } from './shared/utils/global-error-handler';
 import { environment } from '../environments/environment';
+import { DeviceCapabilityService } from './shared/utils/device-capability-check.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: DeviceCapabilityService, useClass: DeviceCapabilityService },
     { provide: USER_THEME_TOKEN, useValue: 'default' },
     provideAppInitializer(() => {
       inject(ThemeStore);

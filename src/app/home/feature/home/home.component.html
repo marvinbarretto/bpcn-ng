@@ -1,11 +1,13 @@
-<!-- <section class="hero" *ngIf="'homepageHero' | featureFlag"></section> -->
+<!-- TODO: Apply feature flag -->
+
+<app-hero></app-hero>
 
 <div class="sections">
-  <!-- <app-next-event-widget></app-next-event-widget>
-  <app-recent-news-widget></app-recent-news-widget> -->
+  <app-next-event-widget></app-next-event-widget>
+  <app-recent-news-widget></app-recent-news-widget>
 
   @if (!authStore.isAuthenticated$$()) {
-  <section>Encourage to register....</section>
+    <section>Encourage to register....</section>
   }
 
   <section>

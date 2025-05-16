@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '../../../auth/data-access/auth.store';
-import { FeatureFlagPipe } from '../../../shared/utils/feature-flag.pipe';
 import { NextEventWidgetComponent } from '../next-event-widget/next-event-widget.component';
 import { RecentNewsWidgetComponent } from '../recent-news-widget/recent-news-widget.component';
+import { HeroComponent } from "../../../shared/ui/hero/hero.component";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ import { RecentNewsWidgetComponent } from '../recent-news-widget/recent-news-wid
     CommonModule,
     NextEventWidgetComponent,
     RecentNewsWidgetComponent,
+    HeroComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

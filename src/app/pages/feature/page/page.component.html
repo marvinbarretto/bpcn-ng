@@ -10,12 +10,12 @@
 <ng-template #pageContent>
   <article class="page" *ngIf="pageStore.page$$(); else errorContent">
     <!-- TODO: Handle fallback properly -->
-    <app-hero
+    <!-- <app-hero
       [title]="pageStore.page$$()?.title || 'Default Title'"
       [headingLevel]="'h1'"
       [backgroundImage]="pageStore.page$$()?.heroImageUrl"
       [cssClass]="'custom-hero-style'"
-    ></app-hero>
+    ></app-hero> -->
 
     <div class="page__content">
       <div class="content" *ngIf="pageStore.page$$()?.content">

@@ -12,6 +12,9 @@ import { NavComponent } from './shared/feature/nav/nav.component';
 import { NotificationsComponent } from './shared/ui/notifications/notifications.component';
 import { SearchComponent } from './shared/feature/search/search.component';
 import { PanelComponent } from './shared/ui/panel/panel.component';
+import { DnaBackgroundComponent } from "./shared/ui/dna-background/dna-background.component";
+import { DeviceCapabilityService } from './shared/utils/device-capability-check.service';
+import { SsrPlatformService } from './shared/utils/ssr/ssr-platform.service';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +28,17 @@ import { PanelComponent } from './shared/ui/panel/panel.component';
     NavComponent,
     SearchComponent,
     NotificationsComponent,
-  ],
+    DnaBackgroundComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   private readonly router = inject(Router);
+
+  readonly device = inject(DeviceCapabilityService);
   readonly panelStore = inject(PanelStore);
+  readonly platform = inject(SsrPlatformService);
 
   constructor() {
     this.router.events

@@ -5,32 +5,16 @@ import { Component, Input } from '@angular/core';
   selector: 'app-hero',
   imports: [CommonModule],
   template: `
-    <div
-      class="hero"
-      [ngClass]="cssClass"
-      [ngStyle]="
-        backgroundImage
-          ? { 'background-image': 'url(' + backgroundImage + ')' }
-          : {}
-      "
-    >
-      <div class="hero__text content">
-        <ng-container [ngSwitch]="headingLevel">
-          <h1 class="title" *ngSwitchCase="'h1'">{{ title }}</h1>
-          <h2 class="title" *ngSwitchCase="'h2'">{{ title }}</h2>
-          <h3 class="title" *ngSwitchCase="'h3'">{{ title }}</h3>
-          <span class="title" *ngSwitchDefault>{{ title }}</span>
-        </ng-container>
+    <section class="hero">
+      <div class="hero-content">
+        <h2 class="strapline">
+          Supporting Black men through prostate cancer research, education, and community
+        </h2>
       </div>
-    </div>
+    </section>
   `,
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
-  @Input() title: string = '';
-  @Input() backgroundImage?: string;
-  @Input() cssClass?: string;
-  @Input() headingLevel: 'h1' | 'h2' | 'h3' = 'h1';
-
   constructor() {}
 }
