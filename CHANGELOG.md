@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.4...v0.0.5) (2025-05-19)
+
+
+### Features
+
+* Add placeholder widgets to the homepage ([313da49](https://github.com/marvinbarretto/bpcn-ng/commit/313da4997f39e63ec7e052f96892b353ca60479a))
+
+
+### Bug Fixes
+
+* Stop Header slowing down the SSR build ([dc26c14](https://github.com/marvinbarretto/bpcn-ng/commit/dc26c14cd09b91f1119d057f44ce7c1a4c783c3b))
+
 ### [0.0.4](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.3...v0.0.4) (2025-05-15)
 
 
