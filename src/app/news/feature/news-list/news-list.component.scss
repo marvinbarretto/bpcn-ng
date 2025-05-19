@@ -68,16 +68,20 @@ a:hover {
 
 .news-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  // grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin: 1rem;
 }
+
+// TODO: Componentise this
+.news-card {}
 
 .news-card p {
   color: #555;
 }
 
 .news-card a {
+  margin: 0; padding: 0.5rem;
   display: inline-block;
   text-decoration: none;
 }
