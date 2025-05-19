@@ -1,23 +1,14 @@
 import {
   Component,
-  ElementRef,
   HostBinding,
   OnInit,
-  ViewChild,
   inject,
-  signal,
   AfterViewInit,
+  computed,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
-import { Router, NavigationEnd, RouterModule } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  fromEvent,
-  map,
-  startWith,
-} from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { FeatureFlagPipe } from '../../utils/feature-flag.pipe';
@@ -26,7 +17,6 @@ import { SsrPlatformService } from '../../utils/ssr/ssr-platform.service';
 import { PageStore } from '../../../pages/data-access/page.store';
 import { PanelStore, PanelType } from '../../ui/panel/panel.store';
 import { ViewportService } from '../../data-access/viewport.service';
-import { BREAKPOINTS } from '../../utils/constants';
 import { NavComponent } from '../nav/nav.component';
 
 @Component({
@@ -44,60 +34,36 @@ import { NavComponent } from '../nav/nav.component';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   private readonly router = inject(Router);
-  private readonly ssr = inject(SsrPlatformService);
-  private readonly elementRef = inject(ElementRef);
+  private readonly platform = inject(SsrPlatformService);
   readonly pageStore = inject(PageStore);
   readonly panelStore = inject(PanelStore);
-
-  // Signals
-  // readonly isNavOpen$$ = signal(false);
   readonly isMobile$$ = inject(ViewportService).isMobile$$;
-  readonly isHomepage$$ = signal(false);
+  readonly isHomepage$$ = computed(() => this.router.url === '/');
 
-  constructor() {
-    this.ssr.logContext('HeaderComponent');
+  @ViewChild('headerRef', { static: false }) headerRef!: ElementRef;
+  @ViewChild('panelTrigger', { static: false }) panelTriggerRef!: ElementRef;
 
-    this.router.events
-      .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntilDestroyed()
-      )
-      .subscribe((event) => {
-        const isHome = event.url === '/';
-        this.isHomepage$$.set(isHome);
-        console.log(`🏠 Route changed — isHomepage: ${isHome}`);
-      });
-
-    if (this.ssr.isBrowser) {
-      this.router.events
-        .pipe(
-          filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-          takeUntilDestroyed()
-        )
-        .subscribe(() => {
-          // this.overlayService.hideOverlay();
-        });
-    }
+  ngOnInit(): void {
+    if (this.platform.isServer) return;
+    this.pageStore.loadPrimaryNavLinks();
   }
 
+
   ngAfterViewInit(): void {
+    if (this.platform.isServer) return;
     this.updatePanelOrigin();
   }
 
-  @ViewChild('headerRef', { static: false }) headerRef!: ElementRef;
 
   private updatePanelOrigin() {
-    if (this.ssr.isServer) return;
-
     const rect = this.headerRef?.nativeElement?.getBoundingClientRect();
     const offsetY = rect.bottom + window.scrollY; // in case page is scrolled
     this.panelStore.setOriginY(offsetY);
   }
 
-  @ViewChild('panelTrigger', { static: false }) panelTriggerRef!: ElementRef;
 
   openPanel(theme: PanelType) {
-    if (this.ssr.isServer) return;
+    if (this.platform.isServer) return;
 
     const button = this.panelTriggerRef?.nativeElement as HTMLElement;
 
@@ -107,11 +73,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.panelStore.openAt(theme, y);
   }
 
-  ngOnInit(): void {
-    if (this.ssr.isServer) return;
 
-    this.pageStore.loadPrimaryNavLinks();
-  }
 
   @HostBinding('class.is-mobile') get isMobileClass() {
     return this.isMobile$$();

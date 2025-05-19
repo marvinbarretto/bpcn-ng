@@ -246,3 +246,9 @@ alias gpt="git push && git push --tags"
 ```bash
 git push && git push --tags
 ```
+
+
+### FLush redis cache
+```bash
+redis-cli DEL newsData newsLastFetchDate
+```

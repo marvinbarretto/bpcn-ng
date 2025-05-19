@@ -3,13 +3,13 @@ import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
+import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { join } from 'node:path';
 import { existsSync } from 'node:fs';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'path';
 import bootstrap from './main.server';
@@ -27,8 +27,14 @@ function logError(...args: unknown[]) {
 }
 
 export async function createServer(): Promise<express.Express> {
-  dotenv.config();
+  // dotenv.config();
+  // Explicitly resolve the env file relative to the root
+  dotenv.config({ path: join(process.cwd(), '.env') });
   log('🔧 Environment loaded');
+
+  console.log('🧪 TEST ENV:', process.env['STRAPI_URL']);
+  console.log('🧪 ENV KEYS:', Object.keys(process.env).filter(k => k.includes('NEWS')));
+
 
   const app = express();
   app.set('trust proxy', 1);
