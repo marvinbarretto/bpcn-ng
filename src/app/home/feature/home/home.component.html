@@ -7,16 +7,11 @@
   <app-recent-news-widget></app-recent-news-widget>
 
   @if (!authStore.isAuthenticated$$()) {
-    <section>Encourage to register....</section>
+    <app-register-widget></app-register-widget>
   }
 
-  <section>
-    <h2>Featured event</h2>
-    <p>...</p>
-  </section>
+  <app-featured-event-widget></app-featured-event-widget>
 
-  <section>
-    <h2>Feedback</h2>
-    <p>...</p>
-  </section>
+  <app-advert-widget></app-advert-widget>
+  <app-feedback-widget></app-feedback-widget>
 </div>

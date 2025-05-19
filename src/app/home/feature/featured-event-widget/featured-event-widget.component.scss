@@ -1,0 +1,6 @@
+@use 'styles/index' as *;
+@use 'styles/components/widget' as *;
+
+.widget--featured-event {
+  @include widget-style;
+}

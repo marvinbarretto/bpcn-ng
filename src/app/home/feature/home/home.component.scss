@@ -1,33 +1,12 @@
-:host {
-  display: block;
-}
-
-
-// .sections {
-//   display: grid;
-//   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-//   gap: 1rem;
-//   margin: 1rem;
-// }
-
-// MAsonry style, clean it up
-
 .sections {
-  column-count: 2;
-  column-gap: 1rem;
   margin: 1rem;
-
+  display: grid;
+  gap: 1rem;
+  z-index: 10; // TODO: Handle these centrally
   position: relative;
-  z-index: 10;
-}
-
-.sections > * {
-  break-inside: avoid;
-  margin-bottom: 1rem;
 }
 
 section {
   background-color: rgba(black, 0.1);
-  // background-color: rgba(#ffffee, .8);
   padding: 1rem;
 }
