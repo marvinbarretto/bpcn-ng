@@ -5,8 +5,9 @@ import {
   inject,
   AfterViewInit,
   computed,
-  ViewChild,
+  signal,
   ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
@@ -35,10 +36,19 @@ import { NavComponent } from '../nav/nav.component';
 export class HeaderComponent implements OnInit, AfterViewInit {
   private readonly router = inject(Router);
   private readonly platform = inject(SsrPlatformService);
+
+  readonly isHomepage$$ = signal(this.router.url === '/');
+
+  // TODO: Fix this and find better way, maybe abstract this to a helper ?
+  // this.router.url is not reactive, so we need a signal
+  private readonly currentRoute$$ = signal<string>(this.router.url);
+
+
   readonly pageStore = inject(PageStore);
   readonly panelStore = inject(PanelStore);
   readonly isMobile$$ = inject(ViewportService).isMobile$$;
-  readonly isHomepage$$ = computed(() => this.router.url === '/');
+
+
 
   @ViewChild('headerRef', { static: false }) headerRef!: ElementRef;
   @ViewChild('panelTrigger', { static: false }) panelTriggerRef!: ElementRef;
@@ -61,16 +71,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.panelStore.setOriginY(offsetY);
   }
 
-
-  openPanel(theme: PanelType) {
+  // Opens or closes a panel based on current state
+  togglePanel(panel: PanelType) {
     if (this.platform.isServer) return;
 
+    // Position panel relative to the clicked trigger
     const button = this.panelTriggerRef?.nativeElement as HTMLElement;
-
-    // Get distance from top of page to bottom of button
     const y = button?.getBoundingClientRect().bottom + window.scrollY;
 
-    this.panelStore.openAt(theme, y);
+    this.panelStore.setOriginY(y);
+    this.panelStore.toggle(panel);
   }
 
 

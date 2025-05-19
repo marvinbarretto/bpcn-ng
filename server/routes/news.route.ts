@@ -11,11 +11,7 @@ console.log('🧪 Raw env var:', raw);
 const NEWS_CACHE_TTL = Number(raw || 28) * 86400;
 console.log('🔧 NEWS_CACHE_TTL (seconds):', NEWS_CACHE_TTL);
 
-
-// const NEWS_CACHE_TTL = Number(process.env['NEWS_CACHE_TTL_DAYS'] || 28) * 86400;
-// console.log('🔧 NEWS_CACHE_TTL (seconds):', NEWS_CACHE_TTL);
-
-
+// TODO: Make this configurable
 const rssUrl = `https://news.google.com/rss/search?q=prostate+cancer&hl=en-GB&gl=GB&ceid=GB:en`;
 
 router.get('/api/news', checkCache, async (req, res) => {

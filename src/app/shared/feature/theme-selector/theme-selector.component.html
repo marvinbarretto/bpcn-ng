@@ -4,8 +4,8 @@
       <button
         type="button"
         (click)="setTheme(theme)"
-        [attr.aria-pressed]="theme === currentTheme"
-        [class.active]="theme === currentTheme"
+        [attr.aria-pressed]="currentTheme() === theme"
+        [class.active]="currentTheme() === theme"
       >
         {{ theme }}
       </button>
