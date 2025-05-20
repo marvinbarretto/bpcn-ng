@@ -17,3 +17,4 @@ router.get('/api/debug', (req, res) => {
   });
 });
 
+export default router;
