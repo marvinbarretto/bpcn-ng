@@ -246,3 +246,23 @@ alias gpt="git push && git push --tags"
 ```bash
 git push && git push --tags
 ```
+
+
+## Docker commands:
+
+### Check and remove containers
+```bash
+docker ps -q | xargs docker stop
+docker ps -q | xargs docker rm
+```
+
+### Remove all containers
+```bash
+docker container prune
+```
+
+### Run on port 4040 locally
+```bash
+docker build -t bpcn .
+docker run -p 4040:4000 bpcn
+```

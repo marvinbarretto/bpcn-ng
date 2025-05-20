@@ -5,7 +5,7 @@ import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -72,9 +72,10 @@ export async function createServer(): Promise<express.Express> {
   }));
 
   // Test Redis
-  app.get('/api/test-redis', async (req: Request, res: Response) => {
+  app.get('/api/test-redis', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const redis = await getRedisClient();
+      if (!redis) return next();
       await redis.set('hello', 'world');
       const value = await redis.get('hello');
       res.json({ message: 'Redis is working', value });
