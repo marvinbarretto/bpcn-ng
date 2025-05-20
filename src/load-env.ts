@@ -12,4 +12,9 @@ dotenv.config({ path: envPath });
 
 if (process.env['VERBOSE_ENV']) {
   console.log('🧪 ENV KEYS:', Object.keys(process.env));
+
+  const ttlDays = process.env['NEWS_CACHE_TTL_DAYS'];
+  console.log('🧪 NEWS_CACHE_TTL_DAYS:', ttlDays);
+  console.log('🔧 NEWS_CACHE_TTL (seconds):', Number(ttlDays) * 86400);
 }
+

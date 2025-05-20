@@ -11,6 +11,7 @@ const rssUrl = `https://news.google.com/rss/search?q=prostate+cancer&hl=en-GB&gl
 router.get('/api/news', checkCache, async (req, res, next) => {
   const redis = await getRedisClient();
   if (!redis) return next();
+
   const cachedData = await redis.get('newsData');
 
   if (cachedData) {
@@ -32,9 +33,7 @@ router.get('/api/news', checkCache, async (req, res, next) => {
     }));
 
     await redis.setEx(
-      'newsData',
-      NEWS_CACHE_TTL,
-      JSON.stringify(parsed)
+      'newsData', NEWS_CACHE_TTL, JSON.stringify(parsed)
     );
     console.log('✅ Cached new data in Redis', typeof parsed, parsed?.length);
     return res.json(parsed);
