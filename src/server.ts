@@ -19,6 +19,7 @@ import { generateInlineThemeCss, USER_THEME_TOKEN } from './libs/tokens/user-the
 import cookieParser from 'cookie-parser';
 import { getRedisClient } from '../server/redis/redis.client';
 import newsRoute from '../server/routes/news.route';
+import debugRoute from '../server/routes/debug.route';
 
 // === Debug Utilities ===
 function log(...args: unknown[]) {
@@ -60,6 +61,7 @@ export async function createServer(): Promise<express.Express> {
     next();
   });
 
+  app.use(debugRoute);
   app.use(compression());
   app.use(cors());
   app.use(cookieParser());
