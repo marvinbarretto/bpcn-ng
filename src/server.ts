@@ -1,10 +1,13 @@
+import './load-env';
+
 // File: server.ts
 import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
+
 import dotenv from 'dotenv';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -17,6 +20,7 @@ import { generateInlineThemeCss, USER_THEME_TOKEN } from './libs/tokens/user-the
 import cookieParser from 'cookie-parser';
 import { getRedisClient } from '../server/redis/redis.client';
 import newsRoute from '../server/routes/news.route';
+import debugRoute from '../server/routes/debug.route';
 
 // === Debug Utilities ===
 function log(...args: unknown[]) {
@@ -64,6 +68,7 @@ export async function createServer(): Promise<express.Express> {
     next();
   });
 
+  app.use(debugRoute);
   app.use(compression());
   app.use(cors());
   app.use(cookieParser());
@@ -74,9 +79,10 @@ export async function createServer(): Promise<express.Express> {
   }));
 
   // Test Redis
-  app.get('/api/test-redis', async (req: Request, res: Response) => {
+  app.get('/api/test-redis', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const redis = await getRedisClient();
+      if (!redis) return next();
       await redis.set('hello', 'world');
       const value = await redis.get('hello');
       res.json({ message: 'Redis is working', value });

@@ -1,7 +1,19 @@
-// Having issues with loading env variables in SSR
-// So we load them here
 import dotenv from 'dotenv';
-import { join } from 'path';
+import { resolveRelativePath } from './utils/resolve-module-path';
 
-dotenv.config({ path: join(process.cwd(), '.env') });
-console.log('🧪 ENV KEYS:', Object.keys(process.env).filter(k => k.includes('NEWS')));
+const resolvePath = resolveRelativePath(import.meta.url);
+const envPath = resolvePath('.env');
+
+if (process.env['VERBOSE_ENV']) {
+  console.log('⚙️ Attempting to load .env from:', envPath);
+}
+
+dotenv.config({ path: envPath });
+
+if (process.env['VERBOSE_ENV']) {
+  console.log('🧪 ENV KEYS:', Object.keys(process.env));
+
+  const ttlDays = process.env['NEWS_CACHE_TTL_DAYS'];
+  console.log('🧪 NEWS_CACHE_TTL_DAYS:', ttlDays);
+  console.log('🔧 NEWS_CACHE_TTL (seconds):', Number(ttlDays) * 86400);
+}

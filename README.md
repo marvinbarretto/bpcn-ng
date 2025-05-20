@@ -137,83 +137,12 @@ If you're using GitHub Actions or Railway builds, you can set up CI to:
 
 > This gives you full control — manual local bumps or automated CI releases.
 
-## 🧪 Tooling
-
-### `standard-version`
-Used for changelog + semantic versioning.
-
-```
-npm install --save-dev standard-version
-```
-
-Add to `package.json`:
-```json
-"scripts": {
-  "release": "standard-version"
-}
-```
-
-### `husky` (optional)
-To enforce commit rules locally before they enter the repo.
-
-```
-npm install --save-dev husky
-npx husky install
-```
-
-Add to `package.json`:
-```json
-"scripts": {
-  "prepare": "husky install"
-}
-```
-
-Then manually create the hook:
-
-```bash
-mkdir -p .husky
-cat <<'EOF' > .husky/commit-msg
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npx --no -- commitlint --edit "$1"
-EOF
-chmod +x .husky/commit-msg
-```
-
-### `commitlint` (optional)
-To validate conventional commits:
-
-```
-npm install --save-dev @commitlint/{cli,config-conventional}
-```
-
-Add to `package.json`:
-```json
-"commitlint": {
-  "extends": ["@commitlint/config-conventional"]
-}
-```
-
-## 🔖 Branching
-
-- Work in feature branches locally
-- Merge to `master` to trigger Railway build and optional version bump
-
-No need for PRs unless working with others.
 
 ## 📄 Files created
 - `CHANGELOG.md`: auto-managed by `standard-version`
-- `.husky/`: optional git hooks
-
-You're now ready to commit cleanly, bump semver, and ship like a pro.
 
 
-
-
-
-`--release-as` flag to override the version bump:
-
+## Standard Version
 ```bash
 npm run release -- --release-as 1.0.0
 ```
@@ -223,28 +152,47 @@ npm run release -- --release-as major
 ```
 
 
-
-# Git Aliases
+## Git Aliases
+```bash
 alias release="npm run release"
 alias gs="git status"
 alias gcm="git commit -m"
 alias gp="git pull"
 alias gpt="git push && git push --tags"
+```
 
 ## Workflow
-- Do your work locally on a feature branch
+- work locally on a feature branch
   - `gs` (Check status)
   - `gp` (Pull)
   
-- Commit with a proper prefix: (feat:, fix:, chore:, docs:, etc.)
+- commit with a proper prefix: (feat:, fix:, chore:, docs:, etc.)
   - `gcm` (Add commit message)
   - `release` (Add `--release-as` flag to override the version bump if necessary)
   - `gpt` (Push with tags)
 
-- Push with:
-
 ```bash
-git push && git push --tags
+git push && git push --tags (gpt)
+```
+
+
+## Docker commands:
+
+### Check and remove containers
+```bash
+docker ps -q | xargs docker stop
+docker ps -q | xargs docker rm
+```
+
+### Remove all containers
+```bash
+docker container prune
+```
+
+### Run on port 4040 locally
+```bash
+docker build -t bpcn .
+docker run -p 4040:4000 bpcn
 ```
 
 

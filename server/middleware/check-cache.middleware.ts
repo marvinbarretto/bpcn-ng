@@ -8,6 +8,7 @@ export async function checkCache(
 ) {
   try {
     const redis = await getRedisClient();
+    if (!redis) return next();
     const data = await redis.get('newsData');
     if (data) {
       console.log('✅ Served from Redis cache');
