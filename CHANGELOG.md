@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.6...v0.0.7) (2025-05-20)
+
+
+### Bug Fixes
+
+* **docker:** use npm run build instead of build:ssr for Dockerfile ([e2321ea](https://github.com/marvinbarretto/bpcn-ng/commit/e2321ea65d5027e9a49177b4d511a8b90748eed7))
+
 ### [0.0.6](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.5...v0.0.6) (2025-05-20)
 
 ### [0.0.5](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.4...v0.0.5) (2025-05-19)
