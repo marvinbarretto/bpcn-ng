@@ -5,7 +5,7 @@ import { checkCache } from '../middleware/check-cache.middleware';
 import { XMLParser } from 'fast-xml-parser';
 
 const router = Router();
-const NEWS_CACHE_TTL = Number(process.env['NEWS_CACHE_TTL_DAYS'] || 28) * 86400;
+const NEWS_CACHE_TTL = Number(process.env['NEWS_CACHE_TTL_DAYS'] || 1) * 86400;
 const rssUrl = `https://news.google.com/rss/search?q=prostate+cancer&hl=en-GB&gl=GB&ceid=GB:en`;
 
 router.get('/api/news', checkCache, async (req, res, next) => {

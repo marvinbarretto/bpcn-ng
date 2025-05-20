@@ -1,4 +1,18 @@
-import './load-env';
+// import './load-env';
+import { existsSync } from 'node:fs';
+import dotenv from 'dotenv';
+
+const localEnvPath = './.env';
+if (existsSync(localEnvPath)) {
+  dotenv.config({ path: localEnvPath });
+  if (process.env['VERBOSE_ENV']) {
+    console.log('✅ Loaded .env from', localEnvPath);
+    const keys = Object.keys(process.env).filter(k => k.includes('NEWS'));
+    console.log('🧪 ENV KEYS:', keys);
+    console.log('🧪 NEWS_CACHE_TTL_DAYS:', process.env['NEWS_CACHE_TTL_DAYS']);
+    console.log('🔧 NEWS_CACHE_TTL (seconds):', Number(process.env['NEWS_CACHE_TTL_DAYS']) * 86400);
+  }
+}
 
 // File: server.ts
 import 'zone.js/node';
@@ -6,13 +20,12 @@ import 'zone.js/node';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
 
-import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { join } from 'node:path';
-import { existsSync } from 'node:fs';
+
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'path';
 import bootstrap from './main.server';
