@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.7...v0.0.8) (2025-05-20)
+
+
+### Features
+
+* News layout page ([5402a3e](https://github.com/marvinbarretto/bpcn-ng/commit/5402a3ed19063b4dfaeb91a57855c2a997b85257))
+* News: make card component and introduce grid UI logic ([ae563cb](https://github.com/marvinbarretto/bpcn-ng/commit/ae563cbbfc050ebc0badfe441fde14be49455c1e))
+* NewsSnippet: Seperate out the source from the response ([f011fbf](https://github.com/marvinbarretto/bpcn-ng/commit/f011fbf35f2bb7567877a1163199b3734cb68f2c))
+
 ### [0.0.7](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.6...v0.0.7) (2025-05-20)
 
 
