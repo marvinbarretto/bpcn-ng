@@ -25,17 +25,31 @@ router.get('/api/news', checkCache, async (req, res, next) => {
     const json = parser.parse(xmlResponse.data);
     const items = json.rss?.channel?.item ?? [];
 
-    const parsed = items.map((item: any) => ({
-      title: item.title ?? '',
-      link: item.link ?? '',
-      pubDate: item.pubDate ?? '',
-      description: item.description ?? '',
-    }));
+    const parsed = items.map((item: any) => {
+      const rawTitle = item.title ?? '';
+      const seperator = ' - ';
+      const lastIndex = rawTitle.lastIndexOf(seperator);
+
+      let title = rawTitle;
+      let source = null;
+
+      if (lastIndex > -1) {
+        title = rawTitle.substring(0, lastIndex).trim();
+        source = rawTitle.substring(lastIndex + seperator.length).trim();
+      }
+
+      return {
+        title,
+        source,
+        link: item.link ?? '',
+        pubDate: item.pubDate ?? ''
+      };
+    });
 
     await redis.setEx(
       'newsData', NEWS_CACHE_TTL, JSON.stringify(parsed)
     );
-    console.log('✅ Cached new data in Redis', typeof parsed, parsed?.length);
+    console.log('✅ Cached new data in Redis', { type: typeof parsed, length: parsed?.length , sample: parsed[0] });
     return res.json(parsed);
   } catch (error) {
     console.error('❌ Error fetching news:', error);

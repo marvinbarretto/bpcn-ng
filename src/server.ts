@@ -85,11 +85,12 @@ export async function createServer(): Promise<express.Express> {
   app.use(compression());
   app.use(cors());
   app.use(cookieParser());
-  app.use(rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: 'Too many requests, try again later.',
-  }));
+  // Using Redis now so rate limiting is not needed
+  // app.use(rateLimit({
+  //   windowMs: 15 * 60 * 1000,
+  //   max: 100,
+  //   message: 'Too many requests, try again later.',
+  // }));
 
   // Test Redis
   app.get('/api/test-redis', async (req: Request, res: Response, next: NextFunction) => {
