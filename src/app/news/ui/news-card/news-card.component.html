@@ -1,0 +1,8 @@
+<article class="news-card">
+  <a [routerLink]="news.link" target="_blank" rel="noopener noreferrer">
+    <h3>{{ news.title }}</h3>
+    <p class="date">{{ news.pubDate | date: 'd MMM yyyy' }}</p>
+    <p class="source" *ngIf="news.source">{{ news.source }}</p>
+
+  </a>
+</article>

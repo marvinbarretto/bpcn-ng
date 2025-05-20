@@ -7,9 +7,10 @@ import { of } from 'rxjs';
 import { PaginationService } from '../../../shared/data-access/pagination.service';
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../../shared/ui/pagination/pagination.component';
+import { NewsCardComponent } from '../../ui/news-card/news-card.component';
 @Component({
   selector: 'app-news-list',
-  imports: [CommonModule, FormsModule, PaginationComponent],
+  imports: [CommonModule, FormsModule, PaginationComponent, NewsCardComponent],
   templateUrl: './news-list.component.html',
   styleUrl: './news-list.component.scss',
 })

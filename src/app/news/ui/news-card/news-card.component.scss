@@ -1,0 +1,79 @@
+@use 'styles/index' as *;
+
+:host {
+  container-type: inline-size;
+  container-name: news-card;
+  display: block;
+  height: 100%;
+  outline: 2px dashed orange; // 👀 Debug: show the host container
+}
+
+.news-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: background 0.3s ease;
+  border-radius: 0.5rem;
+
+  outline: 1px dashed purple; // 👀 Debug: show the component
+
+  @container news-card (min-width: 300px) {
+    background-color: #fee2e2; // red-100
+    color: #991b1b; // red-700
+  }
+
+  @container news-card (min-width: 500px) {
+    background-color: #dbeafe; // blue-100
+    color: #1e3a8a; // blue-900
+  }
+
+  @container news-card (min-width: 700px) {
+    background-color: #dcfce7; // green-100
+    color: #166534; // green-700
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none; // ✅ Remove underline
+    display: block;
+
+    &:hover h3 {
+      text-decoration: underline; // Optional: underline title on hover only
+    }
+  }
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+  }
+
+  .date {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .source {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  .description {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text);
+
+    @container news-card (min-width: 400px) {
+      font-size: 1rem;
+    }
+  }
+}
