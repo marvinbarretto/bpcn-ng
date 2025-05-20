@@ -8,15 +8,23 @@
   </p>
 </div> -->
 
+<!-- <input
+  type="search"
+  placeholder="Search news..."
+
+  (input)="onSearch(($event.target as HTMLInputElement).value)"
+  [value]="searchTerm$$()"
+/> -->
+
 <app-pagination
-[currentPage]="currentPage"
-[totalPages]="totalPages"
-[pageSize]="pageSize"
-(pageChange)="onPageChange($event)"
+  [currentPage]="currentPage$$()"
+  [totalPages]="totalPages$$()"
+  [pageSize]="pageSize$$()"
+  (pageChange)="onPageChange($event)"
 ></app-pagination>
 
 <ul class="news-container">
-  <li *ngFor="let news of paginatedNews">
+  <li *ngFor="let news of paginatedNews$$()">
     <app-news-card [news]="news" />
   </li>
 </ul>
