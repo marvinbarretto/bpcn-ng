@@ -1,3 +1,5 @@
+import './load-env';
+
 // File: server.ts
 import 'zone.js/node';
 

@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:ssr": "ng build && npm run serve:ssr",
-    "serve:ssr": "node dist/bpcn-ng/server/server.mjs",
+    "serve:ssr": "VERBOSE_ENV=true node dist/bpcn-ng/server/server.mjs",
     "release": "standard-version",
     "analyze": "source-map-explorer dist/bpcn-ng/browser/*.js"
   },
