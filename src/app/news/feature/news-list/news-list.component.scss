@@ -1,7 +1,16 @@
 .news-container {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-flow: dense; // fill empty spaces
+
+  li.wide {
+    grid-column: span 2;
+  }
+
+  li.tall {
+    grid-row: span 2;
+  }
 
   li {
     height: 100%;
@@ -13,5 +22,15 @@
 
   li:nth-child(3n) {
     grid-row: span 2;
+  }
+
+  @media (min-width: 768px) {
+    li.wide {
+      grid-column: span 2;
+    }
+
+    li.tall {
+      grid-row: span 2;
+    }
   }
 }

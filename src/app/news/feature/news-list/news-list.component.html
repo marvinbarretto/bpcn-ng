@@ -23,8 +23,12 @@
   (pageChange)="onPageChange($event)"
 ></app-pagination>
 
-<ul class="news-container">
-  <li *ngFor="let news of paginatedNews$$()">
-    <app-news-card [news]="news" />
+<ul class="news-container" [attr.data-seed]="layoutSeed$$()">
+  <li *ngFor="let news of paginatedNews$$(); let i = index"
+      [ngClass]="getNewsCardClass(i)">
+    <app-news-card
+      [news]="news"
+      [isFeatured]="isFeatured(i)"
+       />
   </li>
 </ul>

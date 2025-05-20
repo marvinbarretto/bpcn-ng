@@ -17,6 +17,12 @@ import { SsrPlatformService } from '../../../shared/utils/ssr/ssr-platform.servi
 })
 export class NewsListComponent implements OnInit, OnDestroy {
   readonly platform = inject(SsrPlatformService);
+
+  readonly layoutSeed$$ = signal<number>(Math.random());
+
+  private cleanupResize: (() => void) | null = null;
+
+
   readonly news$$ = signal<NewsSnippet[]>([]);
   readonly searchTerm$$ = signal('');
   readonly currentPage$$ = signal(1);
@@ -33,8 +39,13 @@ export class NewsListComponent implements OnInit, OnDestroy {
     }
   };
 
+  isFeatured(index: number): boolean {
+    const cls = this.getNewsCardClass(index);
+    return cls === 'wide' || cls === 'tall';
+  }
+
   readonly pageSize$$ = computed(() => {
-    const width = this.screenWidth$$();
+  const width = this.screenWidth$$();
     const size = width === null
       ? 6 // SSR fallback
       : width < 600
@@ -80,8 +91,6 @@ export class NewsListComponent implements OnInit, OnDestroy {
 
     return result;
   });
-
-  private cleanupResize: (() => void) | null = null;
 
   constructor(
     private readonly newsService: NewsService,
@@ -138,7 +147,20 @@ export class NewsListComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(page: number): void {
+    console.log('[📄 onPageChange]', page);
+
     this.currentPage$$.set(page);
+    this.layoutSeed$$.set(Math.random());
+    console.log('[🔄 layoutSeed$$ updated]', this.layoutSeed$$());
+  }
+
+  getNewsCardClass(index: number): string {
+    const seed = this.layoutSeed$$();
+    const mod = Math.floor(seed * 10); // 0–9
+
+    if ((index + mod) % 5 === 0) return 'wide';
+    if ((index + mod) % 4 === 0) return 'tall';
+    return 'default';
   }
 
   onSearch(term: string): void {
