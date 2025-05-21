@@ -37,11 +37,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   private readonly router = inject(Router);
   private readonly platform = inject(SsrPlatformService);
 
-  readonly isHomepage$$ = signal(this.router.url === '/');
 
   // TODO: Fix this and find better way, maybe abstract this to a helper ?
   // this.router.url is not reactive, so we need a signal
-  private readonly currentRoute$$ = signal<string>(this.router.url);
+  // private readonly currentRoute$$ = signal<string>(this.router.url);
+  private currentRoute$$ = signal<string>('');
+
+  constructor() {
+    this.router.events.subscribe(() => {
+      this.currentRoute$$.set(this.router.url)
+    })
+  }
+
+  readonly isHomepage$$ = computed(() => this.currentRoute$$() === '/');
+
 
 
   readonly pageStore = inject(PageStore);
@@ -56,6 +65,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.platform.isServer) return;
     this.pageStore.loadPrimaryNavLinks();
+
+    console.log('isHomepage$$', this.isHomepage$$());
+    console.log('currentRoute$$', this.currentRoute$$());
   }
 
 

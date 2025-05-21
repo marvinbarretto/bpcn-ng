@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { AuthService } from '../../data-access/auth.service';
+import { Component } from '@angular/core';
 import { AuthStore } from '../../data-access/auth.store';
-import { RegisterForm, RegisterPayload } from '../../utils/auth.model';
 import {
   FormBuilder,
   FormGroup,

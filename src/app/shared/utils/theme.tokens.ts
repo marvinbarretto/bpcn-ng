@@ -39,8 +39,8 @@ export const themeTokens: Record<string, Theme> = {
     name: 'Default',
     isDark: false,
     tokens: {
-      background: '#FFFFEE',
-      text: '#333333',
+      background: '#ECDFCC',
+      text: '#181C14',
       primary: '#007BFF',
       onPrimary: '#FFFFFF',
       secondary: '#6C757D',

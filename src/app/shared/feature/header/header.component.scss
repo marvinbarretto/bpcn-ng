@@ -1,11 +1,16 @@
 @use 'styles/index' as *;
 
+// Cool colour scheme to adopt
+$black: #181C14;
+$grey: #181C14;
+$accent: #697565;
+$white: #ECDFCC;
+
 // TODO: Brand colours need to be centralised:
-// background-color: #1a2e3d; // #333;
-// color: #cc945f; // white;
+
 
 :host {
-  display: block;
+    display: block;
 }
 
 nav {
@@ -13,6 +18,8 @@ nav {
 }
 
 .header {
+
+
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -26,8 +33,13 @@ nav {
   text-align: center;
   text-decoration: none;
   padding: 1rem 2rem;
-  color: var(--color-onPrimary);
-  background-color: var(--color-primary);
+
+  background-color: $black;
+  color: $white;
+
+  // color: var(--color-onPrimary);
+  // background-color: var(--color-primary);
+
   line-height: 1.2;
 }
 
@@ -46,8 +58,10 @@ nav {
 // === Navigation ===
 
 .main-nav {
-  background-color: var(--color-secondary);
-  color: var(--color-onSecondary);
+  background-color: var(--brand-medium);
+
+  align-items: center;
+
   justify-content: space-between;
   flex-direction: row-reverse;
 
@@ -79,15 +93,19 @@ a,
 button {
   display: block;
   padding: 0.5rem;
-  @include link-style;
-  color: var(--color-primary);
+  font-size: var(--font-size);
+  color: white;
   background: transparent;
   border: none;
 
   &:hover {
-    color: var(--color-accent);
-    background-color: var(--color-overlay);
+    background-color: var(--color-accent);
   }
+}
+
+.nav-link {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .link {
@@ -98,7 +116,7 @@ button {
   align-self: center;
   overflow: hidden;
   text-decoration: none;
-  color: var(--color-primary);
+  color: white;
 
   .label {
     @include underline-style;

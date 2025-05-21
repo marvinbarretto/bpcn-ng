@@ -10,15 +10,16 @@
   text-align: center;
 }
 
+// TODO: Ensure I address dark mode
 // Theme defaults (prefers dark mode)
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #111;
-    --text-color: #eee;
-  }
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --background-color: #111;
+//     --text-color: #eee;
+//   }
 
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-}
+//   body {
+//     background-color: var(--background-color);
+//     color: var(--text-color);
+//   }
+// }

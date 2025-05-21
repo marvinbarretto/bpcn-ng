@@ -1,4 +1,3 @@
-// import './load-env';
 import { existsSync } from 'node:fs';
 import dotenv from 'dotenv';
 

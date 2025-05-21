@@ -41,6 +41,8 @@ export class AppComponent {
   readonly platform = inject(SsrPlatformService);
 
   constructor() {
+    console.log('[AppComponent] Booted at', new Date().toISOString());
+
     this.router.events
     .pipe(
       filter(

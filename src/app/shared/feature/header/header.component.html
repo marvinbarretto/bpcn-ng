@@ -4,12 +4,10 @@
   <ng-container *ngIf="!isHomepage$$(); else titleWithoutLink">
     <a routerLink="/" class="header__title">
       <h1>Black Prostate Cancer Network</h1>
-      <div>{{ isHomepage$$() }}</div> <!--THis is always returning true, which is wrong-->
     </a>
   </ng-container>
   <ng-template #titleWithoutLink>
     <h1 class="header__title">Black Prostate Cancer Network</h1>
-    <div>{{ isHomepage$$() }}</div> <!--THis is always returning true, which is wrong-->
   </ng-template>
 
   <app-user-info></app-user-info>
@@ -46,7 +44,8 @@
       (click)="togglePanel('nav')"
       class="nav-link"
     >
-      ☰ Menu
+    <span class="material-symbols-outlined">menu</span>
+    <span>Menu</span>
     </button>
   </nav>
 </div>
