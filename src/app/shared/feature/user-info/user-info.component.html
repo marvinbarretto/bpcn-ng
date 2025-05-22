@@ -3,7 +3,7 @@
     <div class="user-info__details">
       <span class="material-symbols-outlined">person</span>
       <span class="username">{{ username() }}</span>
-      <span class="role">{{ role() }}</span>
+      <span *ngIf="role()" class="role">{{ role() }}</span>
     </div>
     <app-button (onClick)="logout()">Logout</app-button>
   </section>

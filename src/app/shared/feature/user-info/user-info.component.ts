@@ -23,7 +23,7 @@ export class UserInfoComponent {
   );
 
   readonly username = computed(() => this.user()?.username ?? 'Unknown');
-  readonly role = computed(() => this.user()?.role?.name ?? 'No role');
+  readonly role = computed(() => this.user()?.role?.name);
 
   logout() {
     this.auth.logout();
