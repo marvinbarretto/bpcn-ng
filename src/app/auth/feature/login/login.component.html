@@ -1,44 +1,28 @@
 <div class="login">
   <h1>Login</h1>
-  <div class="quick-login">
-    <button (click)="authStore.login('auth@test.com', 'password123')">
-      Login as Authenticated
-    </button>
-    <button (click)="authStore.login('author@test.com', 'password123')">
-      Login as Author
-    </button>
-    <button (click)="authStore.login('admin@test.com', 'password123')">
-      Login as Admin
-    </button>
-  </div>
+
+  @if (isDev) {
+    <div class="quick-login">
+      <app-button [fullWidth$$]="true" [icon$$]="'person'" (onClick)="quickLogin('auth')">Login as Authenticated</app-button>
+      <app-button [fullWidth$$]="true" [icon$$]="'person'" (onClick)="quickLogin('author')">Login as Author</app-button>
+      <app-button [fullWidth$$]="true" [icon$$]="'person'" (onClick)="quickLogin('admin')">Login as Admin</app-button>
+    </div>
+  }
 
   <form (ngSubmit)="onLogin()">
-    <label for="identifier">Identifier</label>
-    <input
-      id="identifier"
-      [(ngModel)]="identifier"
-      name="identifier"
-      required
-    />
-    <br />
+    <label for="identifier">Email</label>
+    <input id="identifier" name="identifier" [(ngModel)]="identifier" required />
 
     <label for="password">Password</label>
-    <input
-      id="password"
-      [(ngModel)]="password"
-      name="password"
-      type="password"
-      required
-    />
-    <br />
+    <input id="password" name="password" [(ngModel)]="password" type="password" required />
 
-    <div *ngIf="authStore.loading$$()">Loading...</div>
-    <!-- Reactive loading indicator -->
-
-    <div *ngIf="authStore.error$$()">{{ authStore.error$$() }}</div>
-    <!-- Error handling -->
-
-    <button type="submit" [disabled]="authStore.loading$$()">Login</button>
-    <!-- Disable when loading -->
+    <app-button
+      [fullWidth$$]="true"
+      [icon$$]="'login'"
+      [type$$]="'submit'"
+      [variant$$]="'primary'"
+    >
+      Login
+    </app-button>
   </form>
 </div>
