@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,20 @@ export class StrapiService {
   ): Observable<T> {
     return this.http
       .get<T>(`${this.baseUrl}/api/${endpoint}`, options)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          console.error('StrapiService error:', error);
+
+          const message = error instanceof HttpErrorResponse
+            ? `Server error: ${error.status} - ${error.statusText}`
+            : 'An unknown error occurred';
+
+          const notificationService = inject(NotificationService);
+          notificationService.error(message);
+
+          return of([] as T);
+        })
+      );
   }
 
   protected post<T>(
@@ -27,7 +41,17 @@ export class StrapiService {
   ): Observable<T> {
     return this.http
       .post<T>(`${this.baseUrl}/api/${endpoint}`, body, options)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          console.error('StrapiService error:', error);
+
+          const message = error instanceof HttpErrorResponse
+            ? `Server error: ${error.status} - ${error.statusText}`
+            : 'An unknown error occurred';
+
+          return throwError(() => new Error(message));
+        })
+      );
   }
 
   protected handleError(error: HttpErrorResponse): Observable<never> {
