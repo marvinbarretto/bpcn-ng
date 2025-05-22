@@ -91,6 +91,10 @@ export class ThemeStore {
   }
 
   private kebabCase(str: string): string {
-    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    return str
+      .replace(/([a-z])([A-Z])/g, '$1-$2') // camelCase → kebab-case
+      .replace(/\s+/g, '-')                // spaces → dashes
+      .replace(/[^a-z0-9\-]/gi, '')        // remove unsafe characters
+      .toLowerCase();
   }
 }
