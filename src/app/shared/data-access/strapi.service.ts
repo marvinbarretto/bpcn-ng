@@ -11,6 +11,7 @@ import { NotificationService } from './notification.service';
 export class StrapiService {
   protected http = inject(HttpClient);
   protected baseUrl = environment.strapiUrl;
+  protected notificationService = inject(NotificationService);
 
   protected get<T>(
     endpoint: string,
@@ -26,8 +27,7 @@ export class StrapiService {
             ? `Server error: ${error.status} - ${error.statusText}`
             : 'An unknown error occurred';
 
-          const notificationService = inject(NotificationService);
-          notificationService.error(message);
+          this.notificationService.error(message);
 
           return of([] as T);
         })
@@ -43,7 +43,9 @@ export class StrapiService {
       .post<T>(`${this.baseUrl}/api/${endpoint}`, body, options)
       .pipe(
         catchError((error) => {
-          console.error('StrapiService error:', error);
+          console.error('StrapiService error here:', error);
+
+          this.notificationService.error('An unknown error occurred');
 
           const message = error instanceof HttpErrorResponse
             ? `Server error: ${error.status} - ${error.statusText}`
