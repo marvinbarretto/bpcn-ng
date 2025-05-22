@@ -1,9 +1,7 @@
 export const environment = {
-  production: true,
+  production: false,
   enableAllFeaturesInDevelopment: true,
-  // strapiUrl: process.env['NX_STRAPI_URL'],
   strapiUrl: 'https://strong-cherry-a5c4bb2a89.strapiapp.com',
-  // strapiToken: process.env['NX_STRAPI_TOKEN'],
   strapiToken: '2029cc012cb0eacd6f6b9a6fb51a3f6b275f350318d73df3558b6aae4532f5fc912927a936351eb34cba74834f4dff81efa7b65bd546921438c0992578124d4fe0fbc05e731e2f53af2990b3390805a697fcbb9b7591bfc8ab5deade8c54507bafe4b333f838a8932e9208ea84fc0606f207c49645ad90cf8897e175c8c82c65',
   featureFlags: {
     homepageHero: true,
@@ -11,6 +9,7 @@ export const environment = {
     homepageEventsWidget: true,
     theme: true,
     search: false,
+    newSearch: false,
     login: true,
     register: true,
     news: true,
