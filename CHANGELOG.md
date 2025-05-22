@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.10...v0.0.11) (2025-05-22)
+
+
+### Features
+
+* Setup jest ([ccb8b64](https://github.com/marvinbarretto/bpcn-ng/commit/ccb8b649e3324f343041cd8bf1daa001764783b9))
+
 ### [0.0.10](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.9...v0.0.10) (2025-05-22)
 
 
