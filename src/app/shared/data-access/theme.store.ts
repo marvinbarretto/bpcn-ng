@@ -26,11 +26,17 @@ export class ThemeStore {
   readonly themeType = computed(() => this.themeType$$());
 
   constructor(@Inject(USER_THEME_TOKEN) serverTheme?: ThemeType) {
-    console.log('[ThemeStore] Injected server theme:', serverTheme);
 
-    const initial =
-      serverTheme && themeTokens[serverTheme] ? serverTheme : defaultTheme.type;
+    console.log('[ThemeStore] Raw server theme:', serverTheme);
+
+    const safeTheme = serverTheme
+      ? (serverTheme.charAt(0).toUpperCase() + serverTheme.slice(1)) as ThemeType
+      : defaultTheme.type;
+
+    const initial = themeTokens[safeTheme] ? safeTheme : defaultTheme.type;
     this.themeType$$.set(initial);
+
+    console.log('[ThemeStore] Final theme set to:', initial);
 
     this.platform.onlyOnBrowser(() => {
       const cookieTheme = this.cookie.getCookie(THEME_COOKIE_KEY) as ThemeType;
@@ -79,7 +85,9 @@ export class ThemeStore {
     root.classList.remove(
       ...Object.keys(themeTokens).map((t) => `theme--${t}`)
     );
-    root.classList.add(`theme--${theme.name}`);
+
+    const themeClass = `theme--${this.kebabCase(theme.name)}`;
+    root.classList.add(themeClass);
   }
 
   private kebabCase(str: string): string {

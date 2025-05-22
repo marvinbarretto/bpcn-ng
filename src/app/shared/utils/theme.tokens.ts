@@ -1,14 +1,10 @@
+// TODO: Can we make this enum and does it help us?
 export type ThemeType =
   | 'Default'
+  | 'Dark'
   | 'HighContrast'
-  | 'Tritanopia'
-  | 'LowContrast'
-  | 'Purple'
-  | 'RedGreen'
-  | 'DarkMidnight'
-  | 'DarkPastel'
-  | 'LightPastel'
-  | 'Solar';
+  | 'CVDSafe'
+;
 
 export type Theme = {
   name: string;
@@ -19,9 +15,16 @@ export type Theme = {
 
     primary: string;
     onPrimary: string;
+    primaryHover: string;
+    primaryActive: string;
 
     secondary: string;
     onSecondary: string;
+    secondaryHover: string;
+    secondaryActive: string;
+
+    link: string;
+    linkHover: string;
 
     accent: string;
     onAccent: string;
@@ -41,189 +44,121 @@ export const themeTokens: Record<string, Theme> = {
     tokens: {
       background: '#ECDFCC',
       text: '#181C14',
+
       primary: '#007BFF',
       onPrimary: '#FFFFFF',
+      primaryHover: '#0069D9',
+      primaryActive: '#0056B3',
+
       secondary: '#6C757D',
       onSecondary: '#FFFFFF',
+      secondaryHover: '#5A6268',
+      secondaryActive: '#545B62',
+
+      link: '#007BFF',
+      linkHover: '#0056B3',
+
       accent: '#FFD54F',
       onAccent: '#000000',
+
       error: '#D32F2F',
       onError: '#FFFFFF',
+
       shadow: 'rgba(0, 0, 0, 0.15)',
       overlay: 'rgba(0, 0, 0, 0.5)',
     },
   },
-
-  HighContrast: {
-    name: 'HighContrast',
+  Dark: {
+    name: 'Dark',
     isDark: true,
     tokens: {
-      background: '#000000',
-      text: '#FFFFFF',
-      primary: '#FFFF00',
-      onPrimary: '#000000',
-      secondary: '#00FFFF',
+      background: '#181C14',
+      text: '#ECDFCC',
+
+      primary: '#1E88E5',
+      onPrimary: '#FFFFFF',
+      primaryHover: '#1565C0',
+      primaryActive: '#0D47A1',
+
+      secondary: '#90A4AE',
       onSecondary: '#000000',
-      accent: '#FF00FF',
+      secondaryHover: '#78909C',
+      secondaryActive: '#607D8B',
+
+      link: '#90CAF9',
+      linkHover: '#64B5F6',
+
+      accent: '#FFD54F',
       onAccent: '#000000',
-      error: '#FF0000',
+
+      error: '#EF5350',
       onError: '#000000',
-      shadow: 'rgba(255, 255, 255, 0.2)',
+
+      shadow: 'rgba(0, 0, 0, 0.8)',
       overlay: 'rgba(255, 255, 255, 0.1)',
     },
   },
-
-  Tritanopia: {
-    name: 'Tritanopia',
+  HighContrast: {
+    name: 'High Contrast',
     isDark: false,
     tokens: {
-      background: '#E5E5E5',
-      text: '#330066',
-      primary: '#0033CC',
+      background: '#FFFFFF',
+      text: '#000000',
+
+      primary: '#000000',
       onPrimary: '#FFFFFF',
-      secondary: '#009999',
-      onSecondary: '#FFFFFF',
-      accent: '#FF9933',
-      onAccent: '#000000',
-      error: '#D32F2F',
-      onError: '#FFFFFF',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-      overlay: 'rgba(0, 0, 0, 0.2)',
-    },
-  },
+      primaryHover: '#333333',
+      primaryActive: '#000000',
 
-  LowContrast: {
-    name: 'LowContrast',
-    isDark: false,
-    tokens: {
-      background: '#FFFFCC',
-      text: '#666666',
-      primary: '#999999',
-      onPrimary: '#000000',
-      secondary: '#CCCCCC',
+      secondary: '#FFFFFF',
       onSecondary: '#000000',
-      accent: '#EEEEEE',
+      secondaryHover: '#DDDDDD',
+      secondaryActive: '#CCCCCC',
+
+      link: '#0000EE',
+      linkHover: '#551A8B',
+
+      accent: '#FFFF00',
       onAccent: '#000000',
-      error: '#CC6666',
-      onError: '#000000',
-      shadow: 'rgba(0, 0, 0, 0.05)',
-      overlay: 'rgba(0, 0, 0, 0.1)',
+
+      error: '#FF0000',
+      onError: '#FFFFFF',
+
+      shadow: 'rgba(0, 0, 0, 1)',
+      overlay: 'rgba(0, 0, 0, 0.7)',
     },
   },
-
-  Purple: {
-    name: 'Purple',
+  CVDSafe: {
+    name: 'CVD Safe',
     isDark: false,
     tokens: {
-      background: '#FFECF5',
-      text: '#871C9A',
-      primary: '#AB47BC',
+      background: '#F7F7F7',
+      text: '#2E2E2E',
+
+      // These colors are distinguishable by most people with CVD (from ColorBrewer)
+      primary: '#0072B2',           // Blue
       onPrimary: '#FFFFFF',
-      secondary: '#CE93D8',
-      onSecondary: '#4A148C',
-      accent: '#FFDDEE',
+      primaryHover: '#005C99',
+      primaryActive: '#003F66',
+
+      secondary: '#E69F00',         // Orange
+      onSecondary: '#000000',
+      secondaryHover: '#CC8C00',
+      secondaryActive: '#996600',
+
+      link: '#009E73',              // Green
+      linkHover: '#007F5F',
+
+      accent: '#56B4E9',            // Light Blue
       onAccent: '#000000',
-      error: '#D32F2F',
+
+      error: '#D55E00',             // Red/Orange
       onError: '#FFFFFF',
+
       shadow: 'rgba(0, 0, 0, 0.1)',
       overlay: 'rgba(0, 0, 0, 0.3)',
     },
-  },
-
-  RedGreen: {
-    name: 'RedGreen',
-    isDark: false,
-    tokens: {
-      background: '#E6F4EA',
-      text: '#222222',
-      primary: '#78B389',
-      onPrimary: '#FFFFFF',
-      secondary: '#B32357',
-      onSecondary: '#FFFFFF',
-      accent: '#FF6F61',
-      onAccent: '#FFFFFF',
-      error: '#D32F2F',
-      onError: '#FFFFFF',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-      overlay: 'rgba(0, 0, 0, 0.2)',
-    },
-  },
-
-  DarkMidnight: {
-    name: 'DarkMidnight',
-    isDark: true,
-    tokens: {
-      background: '#121212',
-      text: '#E0E0E0',
-      primary: '#1E88E5',
-      onPrimary: '#FFFFFF',
-      secondary: '#3949AB',
-      onSecondary: '#FFFFFF',
-      accent: '#F50057',
-      onAccent: '#FFFFFF',
-      error: '#EF5350',
-      onError: '#000000',
-      shadow: 'rgba(0, 0, 0, 0.5)',
-      overlay: 'rgba(255, 255, 255, 0.05)',
-    },
-  },
-
-  DarkPastel: {
-    name: 'DarkPastel',
-    isDark: true,
-    tokens: {
-      background: '#2D2D2D',
-      text: '#F8F8F2',
-      primary: '#FF79C6',
-      onPrimary: '#000000',
-      secondary: '#8BE9FD',
-      onSecondary: '#000000',
-      accent: '#BD93F9',
-      onAccent: '#000000',
-      error: '#FF5555',
-      onError: '#000000',
-      shadow: 'rgba(0, 0, 0, 0.4)',
-      overlay: 'rgba(255, 255, 255, 0.05)',
-    },
-  },
-
-  LightPastel: {
-    name: 'LightPastel',
-    isDark: false,
-    tokens: {
-      background: '#FFF1F1',
-      text: '#333333',
-      primary: '#FFB3BA',
-      onPrimary: '#000000',
-      secondary: '#BAE1FF',
-      onSecondary: '#000000',
-      accent: '#B5EAD7',
-      onAccent: '#000000',
-      error: '#FF6961',
-      onError: '#000000',
-      shadow: 'rgba(0, 0, 0, 0.1)',
-      overlay: 'rgba(0, 0, 0, 0.15)',
-    },
-  },
-
-  Solar: {
-    name: 'Solar',
-    isDark: false,
-    tokens: {
-      background: '#FDF6E3',
-      text: '#657B83',
-      primary: '#B58900',
-      onPrimary: '#002B36',
-      secondary: '#268BD2',
-      onSecondary: '#FFFFFF',
-      accent: '#CB4B16',
-      onAccent: '#FFFFFF',
-      error: '#DC322F',
-      onError: '#FFFFFF',
-      shadow: 'rgba(0, 43, 54, 0.2)',
-      overlay: 'rgba(101, 123, 131, 0.15)',
-    },
-  },
+  }
 };
 
 export const ALL_THEME_TYPES = Object.keys(themeTokens) as ThemeType[];
