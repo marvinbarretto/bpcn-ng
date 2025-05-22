@@ -6,6 +6,15 @@
   display: block;
 }
 
+.icon {
+  opacity: .5;
+}
+
+.publication {
+  // TODO: Tweak the colour a little bit
+  // color: hsl(var(--color-text), .5);
+}
+
 .recent-news-widget {
   @include widget-style;
 
@@ -26,6 +35,7 @@
         padding: .5rem;
 
         &:hover {
+          // TODO: Colour hover state
           background-color: rgba(0,0,0,.1);
         }
       }

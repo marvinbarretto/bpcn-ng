@@ -4,10 +4,11 @@ import { EventService } from '../../../events/data-access/event.service';
 import { EventModel } from '../../../events/utils/event.model';
 import { RouterModule } from '@angular/router';
 import { RelativeDatePipe } from '../../../shared/utils/pipes/relative-date.pipe';
+import { ButtonComponent } from '../../../shared/ui/button/button.component';
 
 @Component({
   selector: 'app-next-event-widget',
-  imports: [CommonModule, RouterModule, RelativeDatePipe],
+  imports: [CommonModule, RouterModule, RelativeDatePipe, ButtonComponent],
   templateUrl: './next-event-widget.component.html',
   styleUrl: './next-event-widget.component.scss',
 })
