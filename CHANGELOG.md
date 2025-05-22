@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.9...v0.0.10) (2025-05-22)
+
+
+### Features
+
+* ButtonComponent ([6a4b67d](https://github.com/marvinbarretto/bpcn-ng/commit/6a4b67d2324f3ccae3327e555dd5ce8f340866ee))
+* Make strapi service handle errors better ([83e551f](https://github.com/marvinbarretto/bpcn-ng/commit/83e551f78b35f626f1328434b0f98784fc01a2c8))
+* Strengthen token themes ([17b41d6](https://github.com/marvinbarretto/bpcn-ng/commit/17b41d6884284f8d06452a2f246000dc6391a40a))
+* update Button ([8f7e21c](https://github.com/marvinbarretto/bpcn-ng/commit/8f7e21c0e8d47f7e5e5aa7a1b4275a5f83a62794))
+* Update Login to use new HeaderComponent ([64e5ea1](https://github.com/marvinbarretto/bpcn-ng/commit/64e5ea1c240e57b2b2f3a6b3c2bcbb446aa3e0ca))
+
+
+### Bug Fixes
+
+* Ensure theme names have no space ([81783e2](https://github.com/marvinbarretto/bpcn-ng/commit/81783e25c67c9af84c476066d7e1020c04f978aa))
+* Stop strapi service hanging when its cold ([3227ade](https://github.com/marvinbarretto/bpcn-ng/commit/3227adee0f4729fa04274b4e0509cf900a8beb14))
+
 ### [0.0.9](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.8...v0.0.9) (2025-05-21)
 
 
