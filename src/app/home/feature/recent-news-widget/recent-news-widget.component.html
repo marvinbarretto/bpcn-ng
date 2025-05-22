@@ -3,15 +3,18 @@
 
   <ul>
     <li *ngFor="let item of recentNews()">
-      <a target="_blank" href="{{ item.link }}">
-        {{ item.title }}
-        <span class="date">{{ item.pubDate }}</span>
+      <a class="news-item" target="_blank" href="{{ item.link }}">
+        <h4 class="title">{{ item.title }}</h4>
+        <div class="meta">
+          <span class="date">{{ item.pubDate }}</span>
+          <span class="publication">{{ item.source }}</span>
+        </div>
       </a>
     </li>
   </ul>
 
   <footer>
-    <a routerLink="/news" class="btn">View all news</a>
+    <app-button [routerLink]="'/news'">View all news</app-button>
   </footer>
 </section>
 

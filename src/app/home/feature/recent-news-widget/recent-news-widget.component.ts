@@ -5,10 +5,11 @@ import { NewsSnippet } from '../../../news/utils/news/news.model';
 import { RouterModule } from '@angular/router';
 import { NotificationService } from '../../../shared/data-access/notification.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '../../../shared/ui/button/button.component';
 
 @Component({
   selector: 'app-recent-news-widget',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ButtonComponent],
   templateUrl: './recent-news-widget.component.html',
   styleUrl: './recent-news-widget.component.scss',
 })

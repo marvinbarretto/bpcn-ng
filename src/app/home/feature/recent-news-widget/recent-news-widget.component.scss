@@ -18,20 +18,36 @@
       margin-bottom: 0.75rem;
 
       a {
-        background-color: rgba(white, 0.1);
         display: block;
-        color: var(--color-onAccent);
-        font-size: smaller;
-        font-style: italic;
         text-decoration: none;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
+        background-color: rgba(0,0,0,.05);
         transition: background-color 0.2s ease;
         padding: .5rem;
 
         &:hover {
-          background-color: rgba(white, 0.2);
+          background-color: rgba(0,0,0,.1);
         }
       }
     }
   }
+}
+
+.publication {
+  font-size: 1rem;
+  padding: .2rem .5rem;
+}
+
+.meta {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.news-item {
+  padding: .5rem;
+  background-color: rgba(255,255,255,.05);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
