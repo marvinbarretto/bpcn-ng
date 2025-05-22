@@ -3,25 +3,25 @@ button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.05s ease;
+
 
   display: inline-flex;
   gap: .5rem;
   justify-content: center;
 
-
-
   &[data-variant='primary'] {
-    background: var(--color-primary);
-    color: var(--color-onPrimary);
+    background-color: var(--color-buttonPrimaryBase);
+    color: var(--color-buttonPrimaryText);
 
     &:hover {
-      background: var(--color-primaryHover);
+      background-color: var(--color-buttonPrimaryHover);
     }
 
     &:active {
-      background: var(--color-primaryActive);
+      background-color: var(--color-buttonPrimaryActive);
       transform: scale(0.97);
     }
   }
@@ -31,27 +31,16 @@ button {
   }
 
   &[data-variant='secondary'] {
-    background: var(--color-secondary);
-    color: var(--color-onSecondary);
+    background-color: var(--color-buttonSecondaryBase);
+    color: var(--color-buttonSecondaryText);
 
     &:hover {
-      background: var(--color-secondaryHover);
+      background-color: var(--color-buttonSecondaryHover);
     }
 
     &:active {
-      background: var(--color-secondaryActive);
+      background-color: var(--color-buttonSecondaryActive);
       transform: scale(0.97);
-    }
-  }
-
-  &[data-variant='link'] {
-    background: none;
-    color: var(--color-link);
-    padding: 0;
-    text-decoration: underline;
-
-    &:hover {
-      color: var(--color-linkHover);
     }
   }
 

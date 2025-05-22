@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '../button/button.component';
 @Component({
   selector: 'app-pagination',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ButtonComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
 })
