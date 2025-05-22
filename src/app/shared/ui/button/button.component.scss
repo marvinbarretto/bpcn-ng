@@ -1,0 +1,75 @@
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease, transform 0.05s ease;
+
+  &[data-variant='primary'] {
+    background: var(--theme-primary);
+    color: var(--theme-onPrimary);
+
+    &:hover {
+      background: var(--theme-primaryHover);
+    }
+
+    &:active {
+      background: var(--theme-primaryActive);
+      transform: scale(0.97);
+    }
+  }
+
+  &[data-variant='secondary'] {
+    background: var(--theme-secondary);
+    color: var(--theme-onSecondary);
+
+    &:hover {
+      background: var(--theme-secondaryHover);
+    }
+
+    &:active {
+      background: var(--theme-secondaryActive);
+      transform: scale(0.97);
+    }
+  }
+
+  &[data-variant='link'] {
+    background: none;
+    color: var(--theme-link);
+    padding: 0;
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--theme-linkHover);
+    }
+  }
+
+  &.is-loading {
+    cursor: wait;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    margin-left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,10 @@
+<button
+  [attr.data-variant]="variant$$()"
+  [disabled]="disabled$$() || loading$$()"
+  [class.is-loading]="loading$$()"
+  [attr.aria-busy]="loading$$()"
+  type="button"
+>
+  <ng-content />
+  <span *ngIf="loading$$()" class="spinner" aria-hidden="true"></span>
+</button>
