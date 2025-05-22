@@ -3,11 +3,11 @@ import { AuthStore } from '../../../auth/data-access/auth.store';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FeatureFlagPipe } from '../../utils/feature-flag.pipe';
-import { UserService } from '../../../users/data-access/user.service';
+import { ButtonComponent } from '../../ui/button/button.component';
 
 @Component({
   selector: 'app-user-info',
-  imports: [CommonModule, RouterModule, FeatureFlagPipe],
+  imports: [CommonModule, RouterModule, FeatureFlagPipe, ButtonComponent],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.scss',
 })
