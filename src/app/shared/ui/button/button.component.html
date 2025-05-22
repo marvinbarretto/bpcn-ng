@@ -3,8 +3,22 @@
   [disabled]="disabled$$() || loading$$()"
   [class.is-loading]="loading$$()"
   [attr.aria-busy]="loading$$()"
-  type="button"
+  [class.full-width]="fullWidth$$()"
+  (click)="onClick.emit()"
+  [attr.type]="type$$()"
 >
-  <ng-content />
-  <span *ngIf="loading$$()" class="spinner" aria-hidden="true"></span>
+
+  @if (icon$$()) {
+    <span class="material-symbols-outlined icon">
+      {{ icon$$() }}
+    </span>
+  }
+
+  <span>
+    <ng-content />
+  </span>
+
+  @if (loading$$()) {
+    <span class="spinner" aria-hidden="true"></span>
+  }
 </button>

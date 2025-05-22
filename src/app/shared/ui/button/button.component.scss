@@ -4,45 +4,54 @@ button {
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
   transition: background 0.2s ease, transform 0.05s ease;
 
+  display: inline-flex;
+  gap: .5rem;
+  justify-content: center;
+
+
+
   &[data-variant='primary'] {
-    background: var(--theme-primary);
-    color: var(--theme-onPrimary);
+    background: var(--color-primary);
+    color: var(--color-onPrimary);
 
     &:hover {
-      background: var(--theme-primaryHover);
+      background: var(--color-primaryHover);
     }
 
     &:active {
-      background: var(--theme-primaryActive);
+      background: var(--color-primaryActive);
       transform: scale(0.97);
     }
   }
 
+  &.full-width {
+    width: 100%;
+  }
+
   &[data-variant='secondary'] {
-    background: var(--theme-secondary);
-    color: var(--theme-onSecondary);
+    background: var(--color-secondary);
+    color: var(--color-onSecondary);
 
     &:hover {
-      background: var(--theme-secondaryHover);
+      background: var(--color-secondaryHover);
     }
 
     &:active {
-      background: var(--theme-secondaryActive);
+      background: var(--color-secondaryActive);
       transform: scale(0.97);
     }
   }
 
   &[data-variant='link'] {
     background: none;
-    color: var(--theme-link);
+    color: var(--color-link);
     padding: 0;
     text-decoration: underline;
 
     &:hover {
-      color: var(--theme-linkHover);
+      color: var(--color-linkHover);
     }
   }
 
