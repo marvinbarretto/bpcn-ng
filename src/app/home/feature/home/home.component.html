@@ -3,8 +3,9 @@
 <app-hero></app-hero>
 
 <div class="sections">
-  <app-next-event-widget></app-next-event-widget>
+
   <app-recent-news-widget></app-recent-news-widget>
+  <app-next-event-widget></app-next-event-widget>
 
   @if (!authStore.isAuthenticated$$()) {
     <app-register-widget></app-register-widget>
