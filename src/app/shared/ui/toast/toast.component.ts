@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { ToastService, Toast } from '../../data-access/toast.service';
+import { Component, inject, effect } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ToastService } from '../../data-access/toast.service';
+
 
 @Component({
   selector: 'app-toast',
@@ -10,16 +11,21 @@ import { ToastService, Toast } from '../../data-access/toast.service';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent {
-  private toastService = inject(ToastService);
-  public toasts = this.toastService.toasts$; // Renamed from toasts$ to toasts
+  private readonly toastService = inject(ToastService);
+  readonly toasts$$ = this.toastService.toasts$$Readonly;
 
-  // OnInit, OnDestroy, and timeouts map are removed.
-  // The ToastService's push method already handles setTimeout for auto-dismissal.
+  constructor() {
+    effect(() => {
+      console.log('[ToastComponent] Toasts changed:', this.toasts$$());
+    });
+  }
+
+  // TODO: type this
+  toastClass(toast: any): string {
+    return `toast toast--${toast.type}`;
+  }
 
   dismiss(id: string): void {
     this.toastService.dismiss(id);
-    // No need to manage timeouts here anymore as the service handles it.
-    // If a toast is manually dismissed, its timeout in the service will eventually
-    // try to dismiss a non-existent toast, which is harmless.
   }
 }

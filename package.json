@@ -10,7 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "build:ssr": "ng build && npm run serve:ssr",
+    "ssr": "ng build && npm run serve:ssr",
     "serve:ssr": "VERBOSE_ENV=true node dist/bpcn-ng/server/server.mjs",
     "release": "standard-version",
     "analyze": "source-map-explorer dist/bpcn-ng/browser/*.js"

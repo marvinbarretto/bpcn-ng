@@ -14,6 +14,10 @@
 }
 
 .toast {
+  // Default
+  background-color: var(--color-subtleDarker);
+  color: var(--color-onSubtleDarker);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,27 +30,26 @@
   max-width: 400px;
   word-break: break-word;
   animation: toastEnter 0.3s ease-out;
-  // Default text color, can be overridden by specific types
-  color: $toast-info-text; // Defaulting to info text color, can be any base
+  color: var(--color-text);
 
   &--success {
-    background-color: $toast-success-bg;
-    color: $toast-success-text;
+    background-color: var(--color-success-500);
+    color: var(--color-white);
   }
 
   &--error {
-    background-color: $toast-error-bg;
-    color: $toast-error-text;
+    background-color: var(--color-error-500);
+    color: var(--color-white);
   }
 
   &--warning {
-    background-color: $toast-warning-bg;
-    color: $toast-warning-text;
+    background-color: var(--color-warning-500);
+    color: var(--color-white);
   }
 
   &--info {
-    background-color: $toast-info-bg;
-    color: $toast-info-text; // Explicitly set, though it's the default above
+    background-color: var(--color-info-500);
+    color: var(--color-white);
   }
 }
 

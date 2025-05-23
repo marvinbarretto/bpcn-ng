@@ -1,8 +1,12 @@
 <div class="toast-container">
-  <div
-    *ngFor="let toast of toasts()"
-    class="toast toast--{{ toast.type }}"
-  >
+  <div [ngClass]="toastClass(toast)" class="toast" *ngFor="let toast of toasts$$()">
+    <div class="toast-message">{{ toast.message }}</div>
+    <button (click)="dismiss(toast.id)">Dismiss</button>
+  </div>
+</div>
+
+
+<!--
 
     <span class="material-symbols-outlined toast-icon" [ngSwitch]="toast.type">
       <ng-container *ngSwitchCase="'success'">check_circle</ng-container>
@@ -10,9 +14,5 @@
       <ng-container *ngSwitchCase="'warning'">warning</ng-container>
       <ng-container *ngSwitchCase="'info'">info</ng-container>
     </span>
-    <span class="toast-message">{{ toast.message }}</span>
-    <button class="toast-dismiss-button" (click)="dismiss(toast.id)">
-      &times;
-    </button>
-  </div>
-</div>
+
+-->

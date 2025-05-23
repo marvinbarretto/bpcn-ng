@@ -187,7 +187,8 @@ export class AuthStore {
     this.token$$.set(null);
     this.user$$.set(null);
 
-    this.toastService.success('Logout successful!');
+    // TODO: Get these labels out of a central place
+    this.toastService.success('Logout worked');
     this.router.navigate(['/login']);
   }
 
