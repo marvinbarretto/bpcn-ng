@@ -1,0 +1,89 @@
+@import 'styles/abstracts/toast-colors';
+
+:host {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toast-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--color-white); // Assuming white text for good contrast
+  min-width: 250px;
+  max-width: 400px;
+  word-break: break-word;
+  animation: toastEnter 0.3s ease-out;
+  // Default text color, can be overridden by specific types
+  color: $toast-info-text; // Defaulting to info text color, can be any base
+
+  &--success {
+    background-color: $toast-success-bg;
+    color: $toast-success-text;
+  }
+
+  &--error {
+    background-color: $toast-error-bg;
+    color: $toast-error-text;
+  }
+
+  &--warning {
+    background-color: $toast-warning-bg;
+    color: $toast-warning-text;
+  }
+
+  &--info {
+    background-color: $toast-info-bg;
+    color: $toast-info-text; // Explicitly set, though it's the default above
+  }
+}
+
+.toast-icon {
+  margin-right: 8px;
+  // Optional: Adjust icon size if needed, e.g., font-size: 20px;
+  // Material Icons typically inherit color, so specific color styling might not be needed
+  // unless a different color from the toast text is desired.
+}
+
+.toast-message {
+  flex-grow: 1;
+}
+
+.toast-dismiss-button {
+  background: transparent;
+  border: none;
+  color: inherit; // Inherits color from parent (.toast)
+  font-size: 20px;
+  line-height: 1;
+  margin-left: 10px;
+  padding: 0 5px;
+  cursor: pointer;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+    transform: translateX(100%); // Start off-screen to the right
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); // Slide to original position
+  }
+}
