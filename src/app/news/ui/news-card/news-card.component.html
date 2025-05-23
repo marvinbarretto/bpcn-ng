@@ -1,18 +1,17 @@
 <article class="news-card">
   <a [routerLink]="news.link" target="_blank" rel="noopener noreferrer">
-    <figure *ngIf="isFeatured && imageUrl && !imageError">
-      <img
-        [src]="imageUrl"
-        [alt]="news.title"
-        loading="lazy"
-        width="400"
-        height="300"
-        (error)="imageError = true"
-      />
-    </figure>
+    <img
+      *ngIf="news.img"
+      [src]="news.img"
+      [alt]="news.title"
+      loading="lazy"
+      width="400"
+      height="300"
+    />
 
     <h3>{{ news.title }}</h3>
-    <p class="date">{{ news.pubDate | date: 'd MMM yyyy' }}</p>
+    <!-- TODO: Do an isoDate on the back end -->
+    <p class="date">{{ news.pubDate | date: 'd MMM yyyy' : 'UTC' }}
     <p class="source" *ngIf="news.source">{{ news.source }}</p>
   </a>
 </article>

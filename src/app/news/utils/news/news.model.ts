@@ -3,4 +3,5 @@ export type NewsSnippet = {
   source: string | null;
   link: string;
   pubDate: string;
+  img?: string;
 }
