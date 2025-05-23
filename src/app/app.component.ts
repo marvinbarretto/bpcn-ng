@@ -12,6 +12,7 @@ import { NavComponent } from './shared/feature/nav/nav.component';
 import { NotificationsComponent } from './shared/ui/notifications/notifications.component';
 import { SearchComponent } from './shared/feature/search/search.component';
 import { PanelComponent } from './shared/ui/panel/panel.component';
+import { ToastComponent } from './shared/ui/toast/toast.component';
 import { DnaBackgroundComponent } from "./shared/ui/dna-background/dna-background.component";
 import { DeviceCapabilityService } from './shared/utils/device-capability-check.service';
 import { SsrPlatformService } from './shared/utils/ssr/ssr-platform.service';
@@ -28,7 +29,8 @@ import { SsrPlatformService } from './shared/utils/ssr/ssr-platform.service';
     NavComponent,
     SearchComponent,
     NotificationsComponent,
-    DnaBackgroundComponent
+    DnaBackgroundComponent,
+    ToastComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
