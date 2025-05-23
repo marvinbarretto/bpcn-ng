@@ -5,6 +5,7 @@ import { AuthResponse, RegisterPayload } from '../utils/auth.model';
 import { AuthService } from './auth.service';
 import { UserService } from '../../users/data-access/user.service';
 import { CookieService } from '../../shared/data-access/cookie.service';
+import { ToastService } from '../../shared/data-access/toast.service';
 import { SsrPlatformService } from '../../shared/utils/ssr/ssr-platform.service';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,6 +20,7 @@ export class AuthStore {
   private readonly cookieService = inject(CookieService);
   private readonly platform = inject(SsrPlatformService);
   private readonly router = inject(Router);
+  private readonly toastService = inject(ToastService);
 
   readonly user$$ = signal<User | null>(null);
   readonly token$$ = signal<string | null>(null);
@@ -218,6 +220,7 @@ export class AuthStore {
         });
         this.loading$$.set(false);
         this.error$$.set(null);
+        this.toastService.success('Login successful!');
         this.router.navigate(['/']);
       },
       error: (error: any) => {
