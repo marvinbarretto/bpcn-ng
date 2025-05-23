@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.11...v0.0.12) (2025-05-23)
+
+
+### Features
+
+* Flatten colour tokens and let pagination use them ([85d2941](https://github.com/marvinbarretto/bpcn-ng/commit/85d29415ca1ab1b6c1375de121071ff58c430697))
+* More updates with widgets ([2d77ebc](https://github.com/marvinbarretto/bpcn-ng/commit/2d77ebccd1a497cb36ba3a34abe3e35779022a5a))
+* Recent News widget ([eb1e966](https://github.com/marvinbarretto/bpcn-ng/commit/eb1e966ecd3ca1a1ee97906cd164d417f7fb3689))
+* Tweak the AI code for toast ([e536b0f](https://github.com/marvinbarretto/bpcn-ng/commit/e536b0fcee930f974d6044263e7bec47e6964ea9))
+
+
+### Bug Fixes
+
+* Address issue with date pipe and time zones ([8541f5d](https://github.com/marvinbarretto/bpcn-ng/commit/8541f5d3280807dcfb068f223aa97fa47c85f592))
+* Only show role if we have one ([32d85dd](https://github.com/marvinbarretto/bpcn-ng/commit/32d85dd2b03c0a4fad3e78c343d102f455b09507))
+* Use existing Material Symbols Outlined for toast icons ([55b766d](https://github.com/marvinbarretto/bpcn-ng/commit/55b766d0fa849aed4a1eef0a5fba4b164b197cd4))
+
 ### [0.0.11](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.10...v0.0.11) (2025-05-22)
 
 
