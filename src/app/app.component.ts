@@ -16,6 +16,7 @@ import { ToastComponent } from './shared/ui/toast/toast.component';
 import { DnaBackgroundComponent } from "./shared/ui/dna-background/dna-background.component";
 import { DeviceCapabilityService } from './shared/utils/device-capability-check.service';
 import { SsrPlatformService } from './shared/utils/ssr/ssr-platform.service';
+import { PageTitleService } from './shared/data-access/page-title.service';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +42,7 @@ export class AppComponent {
   readonly device = inject(DeviceCapabilityService);
   readonly panelStore = inject(PanelStore);
   readonly platform = inject(SsrPlatformService);
+  readonly titleService = inject(PageTitleService);
 
   constructor() {
     console.log('[AppComponent] Booted at', new Date().toISOString());

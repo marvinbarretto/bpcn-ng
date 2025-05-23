@@ -21,29 +21,29 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
+    title: 'Login',
     component: LoginComponent,
-    data: { title: 'Login' },
   },
   {
     path: 'register',
+    title: 'Register',
     component: RegisterComponent,
-    data: { title: 'Register' },
   },
   {
     path: 'news',
+    title: 'News',
     component: NewsListComponent,
-    data: { title: 'News' },
   },
   {
     path: 'site-map',
+    title: 'Site Map',
     component: SiteMapComponent,
-    data: { title: 'Site Map' },
   },
   {
     path: 'events',
+    title: 'Events',
     loadChildren: () =>
       import('./events/events.routes').then((m) => m.EVENTS_ROUTES),
-    data: { title: 'Events' },
   },
   // Only works for single-segment routes
   {

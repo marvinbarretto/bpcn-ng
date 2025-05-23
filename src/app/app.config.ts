@@ -1,5 +1,5 @@
 import { ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 
 import { appRoutes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -11,6 +11,7 @@ import { authInterceptor } from './auth/data-access/auth.interceptor';
 import { GlobalErrorHandler } from './shared/utils/global-error-handler';
 import { environment } from '../environments/environment';
 import { DeviceCapabilityService } from './shared/utils/device-capability-check.service';
+import { TemplatePageTitleStrategy } from './TemplatePageTitleStrategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideAuthInitializer(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: 'environment', useValue: environment }
+    { provide: 'environment', useValue: environment },
+    { provide: TitleStrategy, useClass: TemplatePageTitleStrategy }
   ]
 };
