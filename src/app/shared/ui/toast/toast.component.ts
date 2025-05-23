@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { ToastService, Toast } from '../../data-access/toast.service';
 
 @Component({
   selector: 'app-toast',
   standalone: true,
-  imports: [NgFor],
+  imports: [CommonModule],
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss'],
 })

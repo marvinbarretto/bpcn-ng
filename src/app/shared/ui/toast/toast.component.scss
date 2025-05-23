@@ -1,4 +1,4 @@
-@import 'styles/abstracts/toast-colors';
+@use 'styles/index' as *;
 
 :host {
   position: fixed;

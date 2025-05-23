@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { v4 as uuid } from 'uuid';
+import { SsrPlatformService } from '../utils/ssr/ssr-platform.service';
 
 export interface Toast {
   id: string;
@@ -16,6 +17,7 @@ export class ToastService {
   private toasts$$ = signal<Toast[]>([]);
   public readonly toasts$ = this.toasts$$.asReadonly();
   private activeTimeouts: Map<string, number> = new Map();
+  private readonly platform = inject(SsrPlatformService);
 
   private push(
     message: string,
@@ -33,7 +35,10 @@ export class ToastService {
     this.toasts$$.update((toasts) => [...toasts, newToast]);
 
     if (!sticky && timeout) {
-      const timeoutId = window.setTimeout(() => {
+      const win = this.platform.getWindow();
+
+      if (!win) return;
+      const timeoutId = win.setTimeout(() => {
         this.dismiss(newToast.id);
         // No need to remove from activeTimeouts here, dismiss() will handle it
       }, timeout);
