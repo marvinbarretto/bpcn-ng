@@ -1,12 +1,8 @@
 @use '../index' as *;
 
 @mixin widget-style {
-  background-color: color-mix(
-    in srgb,
-    var(--color-background) 85%,
-    var(--color-primary) 15%
-  );
-  color: var(--color-text);
+  background-color: var(--color-subtleLighter);
+  color: var(--color-onSubtleLighter);
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px var(--color-shadow, rgba(0, 0, 0, 0.05));

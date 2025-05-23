@@ -70,10 +70,10 @@ export const themeTokens: Record<string, Theme> = {
       linkHover: '#0069D9',
       linkActive: '#0056B3',
 
-      subtleLighter: '#ECDFCC',
-      subtleDarker: '#181C14',
-      onSubtleLighter: '#181C14',
-      onSubtleDarker: '#ECDFCC',
+      subtleLighter: '#F2E8D8',
+      subtleDarker: '#E3D3BC',
+      onSubtleLighter: '#333333',
+      onSubtleDarker: '#1E1E1E',
 
       accentBase: '#FFD54F',
       accentText: '#000000',
