@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StrapiService } from './strapi.service';
+import { DirectStrapiService } from './strapi.service';
 import { forkJoin, map, Observable } from 'rxjs';
 import { Page } from '../../pages/utils/page.model';
 import { IEvent } from '../../events/utils/event.model';
@@ -7,7 +7,7 @@ import { IEvent } from '../../events/utils/event.model';
 @Injectable({
   providedIn: 'root',
 })
-export class SearchService extends StrapiService {
+export class SearchService extends DirectStrapiService {
   // TODO: REplace any with the correct type
   // NOTE: Using observables instead of signals because involves API calls and async operations
 

@@ -1,3 +1,16 @@
+/**
+ * ❗️DirectStrapiService
+ *
+ * This service exists **only** for direct, uncached calls to Strapi.
+ *
+ * 🔐 Use this for:
+ * - Auth endpoints (e.g. login, register)
+ * - Admin-only tools
+ * - Low-level access in emergencies
+ *
+ * 🚫 Do not use this for content fetching like events, pages, or navigation.
+ * Use your cached backend routes instead (e.g. GET /api/events).
+ */
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
@@ -8,7 +21,7 @@ import { NotificationService } from './notification.service';
 @Injectable({
   providedIn: 'root',
 })
-export class StrapiService {
+export class DirectStrapiService {
   protected http = inject(HttpClient);
   protected baseUrl = environment.strapiUrl;
   protected notificationService = inject(NotificationService);

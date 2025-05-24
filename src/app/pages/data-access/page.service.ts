@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StrapiService } from '../../shared/data-access/strapi.service';
+import { DirectStrapiService } from '../../shared/data-access/strapi.service';
 import { Page, PageResponse, PrimaryNavLink } from '../utils/page.model';
 import { catchError, map, tap, Observable, of } from 'rxjs';
 import { StrapiPageResponse } from '../../shared/utils/strapi.types';
@@ -8,7 +8,7 @@ import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class PageService extends StrapiService {
+export class PageService extends DirectStrapiService {
   // https://docs.strapi.io/dev-docs/api/rest/filters-locale-publication#filtering
   getPageBySlug(slug: string): Observable<Page | null> {
     return this.get<PageResponse>(

@@ -35,8 +35,10 @@ docker build -t bpcn .
 docker run -p 4040:4000 bpcn
 ```
 
+### Redis
+`redis-cli MONITOR` to monitor redis
 
-### Flush redis cache
+Flush redis cache
 ```bash
 redis-cli DEL newsData newsLastFetchDate
 ```

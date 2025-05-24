@@ -5,13 +5,13 @@ import {
   RegisterPayload,
 } from '../utils/auth.model';
 import { Observable } from 'rxjs';
-import { StrapiService } from '../../shared/data-access/strapi.service';
+import { DirectStrapiService } from '../../shared/data-access/strapi.service';
 import { User } from '../../users/utils/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends StrapiService {
+export class AuthService extends DirectStrapiService {
   login(payload: LoginPayload): Observable<AuthResponse> {
     return this.post<AuthResponse>(`auth/local`, payload);
   }

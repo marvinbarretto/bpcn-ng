@@ -18,6 +18,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "dotenv",
+              "compression",
+              "cors",
+              "cookie-parser",
+              "debug",
+              "redis",
+              "form-data",
+              "proxy-from-env",
+              "follow-redirects"
+            ],
             "outputPath": "dist/bpcn-ng",
             "index": "src/index.html",
             "browser": "src/main.ts",
