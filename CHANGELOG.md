@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.12...v0.0.13) (2025-05-24)
+
+
+### Features
+
+* Add photo to homepage ([40a9a05](https://github.com/marvinbarretto/bpcn-ng/commit/40a9a052a43dfd309a6e71e01f4c0fe61013a1d6))
+* Add server side testing capability and cache primary links call ([7c2649f](https://github.com/marvinbarretto/bpcn-ng/commit/7c2649f532ad656ad768826e54c9e5e0af6a8db8))
+* Apply page titles ([01ffc01](https://github.com/marvinbarretto/bpcn-ng/commit/01ffc0178b81921b160d82f91176b37bd63b0ac4))
+* Hardcore subtle primary colours and let widgets consume them ([a5e6724](https://github.com/marvinbarretto/bpcn-ng/commit/a5e67246dc7c65f7d2b8bf3745d20042c0174846))
+* remove Italic from branding ([5696a3d](https://github.com/marvinbarretto/bpcn-ng/commit/5696a3d7e48310bcfd58049691fb7922246e9e88))
+
+
+### Bug Fixes
+
+* TitleService ([0cdcdd2](https://github.com/marvinbarretto/bpcn-ng/commit/0cdcdd21db123bab497999757bc4a50da1a66414))
+
 ### [0.0.12](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.11...v0.0.12) (2025-05-23)
 
 
