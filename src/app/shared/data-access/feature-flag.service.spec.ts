@@ -5,12 +5,13 @@ import { environment } from '../../../environments/environment';
 // Define a type for feature flags for easier mocking
 type FeatureFlags = Record<string, boolean>;
 
+// TODO: Where should I be storing these mocks?
 // Mock the environment
 jest.mock('../../../environments/environment', () => ({
   __esModule: true, // Mark as ES Module
   environment: {
     production: false,
-    enableAllFeaturesInDevelopment: false,
+    enableAllFeaturesForDev: false,
     featureFlags: {} as FeatureFlags,
   },
 }));
@@ -18,10 +19,11 @@ jest.mock('../../../environments/environment', () => ({
 describe('FeatureFlagService', () => {
   let service: FeatureFlagService;
 
+
   // Helper function to set environment properties for a test
   const setEnvironment = (prod: boolean, enableAll: boolean, flags: FeatureFlags) => {
     Object.defineProperty(environment, 'production', { value: prod, configurable: true });
-    Object.defineProperty(environment, 'enableAllFeaturesInDevelopment', { value: enableAll, configurable: true });
+    Object.defineProperty(environment, 'enableAllFeaturesForDev', { value: enableAll, configurable: true });
     Object.defineProperty(environment, 'featureFlags', { value: flags, configurable: true });
   };
 
@@ -40,7 +42,7 @@ describe('FeatureFlagService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('Standard Flag Checks (production=true, enableAllFeaturesInDevelopment=false)', () => {
+  describe('Standard Flag Checks (production=true, enableAllFeaturesForDev=false)', () => {
     beforeEach(() => {
       setEnvironment(true, false, { existingFlagTrue: true, existingFlagFalse: false });
     });
@@ -58,7 +60,7 @@ describe('FeatureFlagService', () => {
     });
   });
 
-  describe('Development Mode: enableAllFeaturesInDevelopment is true (production=false)', () => {
+  describe('Development Mode: enableAllFeaturesForDev is true (production=false)', () => {
     beforeEach(() => {
       setEnvironment(false, true, { devFlagFalse: false });
     });
@@ -72,7 +74,7 @@ describe('FeatureFlagService', () => {
     });
   });
 
-  describe('Production Mode with enableAllFeaturesInDevelopment is true (SHOULD IGNORE enableAllFeaturesInDevelopment)', () => {
+  describe('Production Mode with enableAllFeaturesForDev is true (SHOULD IGNORE enableAllFeaturesForDev)', () => {
     beforeEach(() => {
       setEnvironment(true, true, { prodFlagTrue: true, prodFlagFalse: false });
     });
@@ -90,7 +92,7 @@ describe('FeatureFlagService', () => {
     });
   });
 
-  describe('Development Mode: enableAllFeaturesInDevelopment is false (production=false)', () => {
+  describe('Development Mode: enableAllFeaturesForDev is false (production=false)', () => {
     beforeEach(() => {
       setEnvironment(false, false, { devFlagTrueFalseScenario: true, devFlagFalseFalseScenario: false });
     });

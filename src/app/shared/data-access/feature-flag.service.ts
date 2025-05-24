@@ -13,8 +13,9 @@ export class FeatureFlagService {
   }
 
   isEnabled(flag: keyof typeof environment.featureFlags): boolean {
-    if (!environment.production && environment.enableAllFeaturesInDevelopment)
+    if (!environment.production && environment.enableAllFeaturesForDev) {
       return true;
+    }
 
     return environment.featureFlags[flag] ?? false; // Default to false if the flag is undefined
   }
