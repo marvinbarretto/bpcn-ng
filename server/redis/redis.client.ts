@@ -1,9 +1,11 @@
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 
-let client: ReturnType<typeof createClient> | null = null;
+export type AppRedisClient = RedisClientType;
 
-export async function getRedisClient(): Promise<typeof client> {
-  if (client) return client;
+let client: AppRedisClient | null = null;
+
+export async function getRedisClient(): Promise<AppRedisClient | null> {
+  if (client?.isOpen) return client;
 
   const redisUrl = process.env['REDIS_URL'] ||
     `redis://${process.env['REDIS_HOST'] || '127.0.0.1'}:${process.env['REDIS_PORT'] || 6379}`;
