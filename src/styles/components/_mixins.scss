@@ -14,14 +14,14 @@
   border-radius: 0.25rem;
 
   &:focus {
-    border-color: var(--color-primary);
+    border-color: var(--color-text);
     outline: none;
     box-shadow: 0 0 0 2px var(--color-overlay);
   }
 }
 
 @mixin button-primary {
-  background-color: var(--color-primary);
+  background-color: var(--color-text);
   color: var(--color-on-primary);
   padding: 0.5rem 1.25rem;
   text-align: center;
@@ -29,7 +29,7 @@
   &:hover,
   &:focus {
     background-color: rgba(
-      var(--color-primary),
+      var(--color-text),
       0.85
     ); // requires opacity helper or fallback
     outline: none;
@@ -71,12 +71,12 @@
   &:hover,
   &:focus {
     background-color: rgba(var(--color-overlay), 0.2);
-    color: var(--color-primary);
+    color: var(--color-text);
     outline: none;
   }
 
   &.active {
-    background-color: var(--color-primary);
+    background-color: var(--color-text);
     color: var(--color-on-primary);
   }
 }
@@ -110,7 +110,7 @@
 @mixin link-style {
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: var(--color-primary);
+  color: var(--color-text);
 
   &:hover {
     color: var(--color-accent);
