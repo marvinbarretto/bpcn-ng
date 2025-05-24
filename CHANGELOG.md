@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.13...v0.0.14) (2025-05-24)
+
+
+### Features
+
+* simplify FeatureFlagService ([a672f80](https://github.com/marvinbarretto/bpcn-ng/commit/a672f800271057761f15562f304efe1af308d5ba))
+
+
+### Bug Fixes
+
+* Ensure FeatureFlagService uses current flag values ([fe54d22](https://github.com/marvinbarretto/bpcn-ng/commit/fe54d22136bd7e32f9f4b5c89c4759d6022ff67e))
+
 ### [0.0.13](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.12...v0.0.13) (2025-05-24)
 
 
