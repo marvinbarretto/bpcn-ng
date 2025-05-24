@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.14...v0.0.15) (2025-05-24)
+
+
+### Features
+
+* Proper caching of events API ([d84d3a5](https://github.com/marvinbarretto/bpcn-ng/commit/d84d3a5bb397827221dea351f770f78f9059eb5e))
+
 ### [0.0.14](https://github.com/marvinbarretto/bpcn-ng/compare/v0.0.13...v0.0.14) (2025-05-24)
 
 
