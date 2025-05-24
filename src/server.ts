@@ -33,6 +33,8 @@ import cookieParser from 'cookie-parser';
 import { getRedisClient } from '../server/redis/redis.client';
 import newsRoute from '../server/routes/news.route';
 import debugRoute from '../server/routes/debug.route';
+// import eventsRoute from '../server/routes/events.route';
+import navRoute from '../server/routes/nav.route';
 
 // === Debug Utilities ===
 function log(...args: unknown[]) {
@@ -106,6 +108,8 @@ export async function createServer(): Promise<express.Express> {
   });
 
   app.use(newsRoute);
+  // app.use(eventsRoute);
+  app.use(navRoute);
 
   // Static assets
   app.get(

@@ -36,25 +36,32 @@ export class PageService extends StrapiService {
   }
 
   getPrimaryNavPageLinks(): Observable<PrimaryNavLink[]> {
-    const params = new HttpParams()
-      .set('filters[primaryNavigation][$eq]', 'true')
-      .set('fields[0]', 'title')
-      .set('fields[1]', 'slug');
 
-    return this.get<StrapiPageResponse>('pages', { params }).pipe(
-      tap((res) => {
-        console.log('[Strapi] Got response with', res.data.length, 'items');
-        console.log('[Strapi] Sample item:', res.data[0]);
-      }),
-      map((res) =>
-        res.data.map((item) => ({
-          id: item.id,
-          documentId: item.id.toString(),
-          title: item.title,
-          slug: item.slug,
-        }))
-      )
+
+    return this.http.get<any>('api/getPrimaryNavLinks').pipe(
+      map((res) => res.navigation)
     );
+
+
+    // const params = new HttpParams()
+    //   .set('filters[primaryNavigation][$eq]', 'true')
+    //   .set('fields[0]', 'title')
+    //   .set('fields[1]', 'slug');
+
+    // return this.get<StrapiPageResponse>('pages', { params }).pipe(
+    //   tap((res) => {
+    //     console.log('[Strapi] Got response with', res.data.length, 'items');
+    //     console.log('[Strapi] Sample item:', res.data[0]);
+    //   }),
+    //   map((res) =>
+    //     res.data.map((item) => ({
+    //       id: item.id,
+    //       documentId: item.id.toString(),
+    //       title: item.title,
+    //       slug: item.slug,
+    //     }))
+    //   )
+    // );
   }
 }
 
